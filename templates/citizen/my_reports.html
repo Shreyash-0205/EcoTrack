@@ -96,11 +96,8 @@
                             </td>
                             <td>
                                 <a href="{{ url_for('citizen.report_detail', report_id=report.id) }}" class="fw-semibold text-dark text-decoration-none">
-                                    {{ report.title }}
+                                    {{ report.display_title }}
                                 </a>
-                                {% if report.is_demo %}
-                                    <span class="badge badge-demo ms-1">DEMO</span>
-                                {% endif %}
                                 <div class="small text-muted">
                                     <i class="bi bi-geo-alt"></i> {{ report.location }}
                                     {% if report.has_coordinates %}

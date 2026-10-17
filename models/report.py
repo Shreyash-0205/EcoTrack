@@ -135,13 +135,24 @@ class Report(db.Model):
             return f"/uploads/reports/{self.image_filename}"
         return self.sample_image_url
 
+    @property
+    def display_title(self) -> str:
+        """Return clean title for website presentation without any '[DEMO]' prefix."""
+        if not self.title:
+            return ""
+        clean = self.title.strip()
+        if clean.upper().startswith("[DEMO]"):
+            clean = clean[6:].strip()
+        return clean
+
     def to_dict(self) -> dict:
         """Serialize report to dictionary for API and map visualization."""
         return {
             'id': self.id,
             'user_id': self.user_id,
             'reporter_name': self.reporter.name if self.reporter else 'Anonymous',
-            'title': self.title,
+            'title': self.display_title,
+            'original_title': self.title,
             'description': self.description,
             'category': self.category,
             'category_slug': self.category_slug,

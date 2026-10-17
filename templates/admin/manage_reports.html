@@ -98,11 +98,8 @@
                             </td>
                             <td>
                                 <a href="{{ url_for('citizen.report_detail', report_id=report.id) }}" class="fw-semibold text-dark text-decoration-none">
-                                    {{ report.title }}
+                                    {{ report.display_title }}
                                 </a>
-                                {% if report.is_demo %}
-                                    <span class="badge badge-demo ms-1">DEMO</span>
-                                {% endif %}
                                 <div class="small text-muted">
                                     <i class="bi bi-geo-alt"></i> {{ report.location }}
                                     {% if report.has_coordinates %}
@@ -150,7 +147,7 @@
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label class="form-label fw-semibold small">Hotspot Title</label>
-                                                        <p class="text-muted small mb-0">{{ report.title }}</p>
+                                                        <p class="text-muted small mb-0">{{ report.display_title }}</p>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="status-{{ report.id }}" class="form-label fw-semibold small">Resolution Status</label>
@@ -185,7 +182,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p class="small text-muted mb-2">Are you sure you want to permanently delete report <strong>#{{ report.id }} ({{ report.title }})</strong>?</p>
+                                                    <p class="small text-muted mb-2">Are you sure you want to permanently delete report <strong>#{{ report.id }} ({{ report.display_title }})</strong>?</p>
                                                     <p class="small text-danger mb-0">This action will remove the record, any attached photos, and record an audit log entry. This cannot be undone.</p>
                                                 </div>
                                                 <div class="modal-footer">

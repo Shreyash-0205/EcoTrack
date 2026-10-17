@@ -186,31 +186,22 @@
                                 <span class="media-type-badge media-type-evidence" title="Authenticated citizen-uploaded photograph">
                                     <i class="bi bi-camera-fill"></i> Uploaded Photo
                                 </span>
-                            {% else %}
-                                <span class="media-type-badge media-type-sample" title="Demonstration reference photograph (royalty-free Unsplash stock)">
-                                    <i class="bi bi-image"></i> Sample Photo
-                                </span>
                             {% endif %}
                             <img src="{{ report.display_image_url }}" 
                                  onerror="this.onerror=null; this.src='{{ report.fallback_image_url }}';" 
-                                 alt="{{ report.title }}" 
+                                 alt="{{ report.display_title }}" 
                                  class="report-card-img"
                                  loading="lazy">
                         </div>
 
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div>
-                                    <span class="badge {{ report.status_badge_class }}">{{ report.status }}</span>
-                                    {% if report.is_demo %}
-                                        <span class="badge badge-demo ms-1" title="Demonstration mock record">DEMO</span>
-                                    {% endif %}
-                                </div>
+                                <span class="badge {{ report.status_badge_class }}">{{ report.status }}</span>
                                 <span class="badge {{ report.category_badge_class }}">{{ report.category }}</span>
                             </div>
 
-                            <h5 class="fw-bold mb-2 text-truncate" title="{{ report.title }}">
-                                {{ report.title }}
+                            <h5 class="fw-bold mb-2 text-truncate" title="{{ report.display_title }}">
+                                {{ report.display_title }}
                             </h5>
                             
                             <p class="text-muted small mb-3 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
