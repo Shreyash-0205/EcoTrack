@@ -90,14 +90,11 @@
                         <tr>
                             <td><span class="badge bg-light text-dark border">#{{ report.id }}</span></td>
                             <td>
-                                {% if report.image_filename %}
-                                    <img src="{{ url_for('api.serve_uploaded_image', filename=report.image_filename) }}" 
-                                         alt="Thumbnail" class="report-thumb shadow-sm">
-                                {% else %}
-                                    <div class="report-thumb bg-light d-flex align-items-center justify-content-center text-muted">
-                                        <i class="bi bi-image small"></i>
-                                    </div>
-                                {% endif %}
+                                <img src="{{ report.display_image_url }}" 
+                                     alt="{{ report.category }} thumbnail" 
+                                     class="report-thumb shadow-sm fallback-bg-{{ report.category_slug }}"
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='{{ report.fallback_image_url }}';">
                             </td>
                             <td>
                                 <a href="{{ url_for('citizen.report_detail', report_id=report.id) }}" class="fw-semibold text-dark text-decoration-none">

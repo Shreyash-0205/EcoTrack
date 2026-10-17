@@ -69,6 +69,46 @@ class Report(db.Model):
         }
         return mapping.get(self.category, 'badge-category-other')
 
+    @property
+    def category_slug(self) -> str:
+        """Return standardized slug for category assets."""
+        mapping = {
+            'Wet': 'wet',
+            'Dry': 'dry',
+            'Plastic': 'plastic',
+            'E-waste': 'ewaste',
+            'Mixed': 'mixed',
+            'Other': 'other'
+        }
+        return mapping.get(self.category, 'mixed')
+
+    @property
+    def fallback_image_url(self) -> str:
+        """Return category-specific SVG fallback illustration URL."""
+        return f"/static/images/fallbacks/{self.category_slug}.svg"
+
+    @property
+    def has_valid_image(self) -> bool:
+        """Check if report has an associated uploaded image that exists on disk."""
+        if not self.image_filename:
+            return False
+        import os
+        from flask import current_app
+        try:
+            upload_dir = current_app.config.get('UPLOAD_FOLDER')
+            if upload_dir:
+                return os.path.isfile(os.path.join(upload_dir, self.image_filename))
+        except RuntimeError:
+            pass
+        return True
+
+    @property
+    def display_image_url(self) -> str:
+        """Return the uploaded image URL if it exists on disk, else the category fallback."""
+        if self.has_valid_image:
+            return f"/uploads/reports/{self.image_filename}"
+        return self.fallback_image_url
+
     def to_dict(self) -> dict:
         """Serialize report to dictionary for API and map visualization."""
         return {
@@ -78,11 +118,17 @@ class Report(db.Model):
             'title': self.title,
             'description': self.description,
             'category': self.category,
+            'category_slug': self.category_slug,
+            'category_badge_class': self.category_badge_class,
+            'status_badge_class': self.status_badge_class,
             'location': self.location,
             'latitude': self.latitude,
             'longitude': self.longitude,
             'has_coordinates': self.has_coordinates,
             'image_filename': self.image_filename,
+            'image_url': self.display_image_url,
+            'fallback_image_url': self.fallback_image_url,
+            'has_uploaded_image': self.has_valid_image,
             'status': self.status,
             'admin_notes': self.admin_notes,
             'is_demo': self.is_demo,

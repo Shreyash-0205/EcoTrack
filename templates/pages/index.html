@@ -181,20 +181,18 @@
             {% for report in recent_reports %}
                 <div class="col-lg-4 col-md-6">
                     <div class="card-modern h-100 d-flex flex-column">
-                        {% if report.image_filename %}
-                            <div style="height: 180px; overflow: hidden; background: #f1f5f9;">
-                                <img src="{{ url_for('api.serve_uploaded_image', filename=report.image_filename) }}" 
-                                     alt="{{ report.title }}" 
-                                     class="w-100 h-100" style="object-fit: cover;">
-                            </div>
-                        {% else %}
-                            <div class="d-flex align-items-center justify-content-center bg-light text-muted" style="height: 120px;">
-                                <div class="text-center">
-                                    <i class="bi bi-image fs-3"></i>
-                                    <div class="small">No photo attached</div>
-                                </div>
-                            </div>
-                        {% endif %}
+                        <div class="report-card-media fallback-bg-{{ report.category_slug }}">
+                            {% if report.has_valid_image %}
+                                <span class="media-type-badge">
+                                    <i class="bi bi-camera-fill"></i> Photo
+                                </span>
+                            {% endif %}
+                            <img src="{{ report.display_image_url }}" 
+                                 onerror="this.onerror=null; this.src='{{ report.fallback_image_url }}';" 
+                                 alt="{{ report.title }}" 
+                                 class="report-card-img"
+                                 loading="lazy">
+                        </div>
 
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-2">

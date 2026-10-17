@@ -1,7 +1,9 @@
 """
 Automated tests for waste reporting, filtering, and report lifecycle management.
 """
+import os
 from models import db, Report
+
 
 
 def test_create_report_with_coordinates(auth_citizen_client, app, sample_users):
@@ -145,3 +147,42 @@ def test_unauthorized_citizen_cannot_edit_others_report(client, app, sample_user
 
     response = client.get(f'/reports/{report_id}/edit')
     assert response.status_code == 403
+
+
+def test_category_fallback_images_and_rendering(auth_citizen_client, app, sample_users):
+    """Test image display and category fallbacks for reports with and without photos."""
+    with app.app_context():
+        # Create report without photo
+        report_no_photo = Report(
+            user_id=sample_users['citizen'].id,
+            title="Organic vegetable waste corner",
+            category="Wet",
+            location="Market Lane",
+            description="Decomposing wet waste requiring municipal clearance."
+        )
+        db.session.add(report_no_photo)
+        db.session.commit()
+        no_photo_id = report_no_photo.id
+
+        # Verify model fallback properties
+        assert report_no_photo.category_slug == 'wet'
+        assert report_no_photo.fallback_image_url == '/static/images/fallbacks/wet.svg'
+        assert report_no_photo.has_valid_image is False
+        assert report_no_photo.display_image_url == '/static/images/fallbacks/wet.svg'
+
+        # Verify fallback SVG file physically exists on disk
+        svg_path = os.path.join(app.root_path, 'static', 'images', 'fallbacks', 'wet.svg')
+        assert os.path.isfile(svg_path)
+
+    # Test report detail page displays fallback and no 'No photo attached' placeholder
+    detail_resp = auth_citizen_client.get(f'/reports/{no_photo_id}')
+    assert detail_resp.status_code == 200
+    assert b'No photo attached' not in detail_resp.data
+    assert b'/static/images/fallbacks/wet.svg' in detail_resp.data
+
+    # Test my-reports table page displays fallback thumbnail
+    my_resp = auth_citizen_client.get('/my-reports')
+    assert my_resp.status_code == 200
+    assert b'No photo attached' not in my_resp.data
+    assert b'/static/images/fallbacks/wet.svg' in my_resp.data
+

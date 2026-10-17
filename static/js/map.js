@@ -72,22 +72,24 @@ function initMainMap() {
                         const icon = createStatusIcon(report.status);
                         const marker = L.marker([report.latitude, report.longitude], { icon: icon });
 
-                        let imageHtml = '';
-                        if (report.image_filename) {
-                            imageHtml = `
-                                <div class="mt-2 text-center">
-                                    <img src="/uploads/reports/${report.image_filename}" 
-                                         alt="Waste Photo" 
-                                         style="max-width: 100%; max-height: 120px; object-fit: cover; border-radius: 6px;">
-                                </div>
-                            `;
-                        }
+                        const imgUrl = report.image_url || report.fallback_image_url || '/static/images/fallbacks/other.svg';
+                        const fallbackUrl = report.fallback_image_url || '/static/images/fallbacks/other.svg';
+                        const categorySlug = report.category_slug || 'other';
+
+                        const imageHtml = `
+                            <div class="mt-2 text-center rounded overflow-hidden fallback-bg-${categorySlug}" style="height: 105px; border: 1px solid rgba(0,0,0,0.06);">
+                                <img src="${imgUrl}" 
+                                     alt="${report.category || 'Waste'} Photo" 
+                                     style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                                     onerror="this.onerror=null; this.src='${fallbackUrl}';">
+                            </div>
+                        `;
 
                         const popupHtml = `
                             <div class="map-popup-card" style="min-width: 210px; max-width: 260px;">
                                 <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <span class="badge ${report.status_badge_class}" style="font-size: 0.75rem;">${report.status}</span>
-                                    <span class="badge ${report.category_badge_class}" style="font-size: 0.75rem;">${report.category}</span>
+                                    <span class="badge ${report.status_badge_class || 'bg-secondary text-white'}" style="font-size: 0.75rem;">${report.status}</span>
+                                    <span class="badge ${report.category_badge_class || 'badge-category-other'}" style="font-size: 0.75rem;">${report.category}</span>
                                 </div>
                                 <h6 class="fw-bold mb-1 mt-2 text-dark" style="font-size: 0.95rem;">${report.title}</h6>
                                 <p class="text-muted small mb-1" style="font-size: 0.8rem;">
