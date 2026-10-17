@@ -250,6 +250,19 @@ main {
     color: #ffffff;
 }
 
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.form-control:focus,
+.form-select:focus {
+    outline: 2px solid var(--emerald-green) !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+}
+
 /* Hero Section */
 .hero-section {
     background: linear-gradient(135deg, #1b5e20 0%, #0d3811 100%);
@@ -414,8 +427,8 @@ main {
 .footer-ecotrack {
     background-color: #0f2d12;
     color: rgba(255, 255, 255, 0.78);
-    padding: 3rem 1rem 1.5rem;
-    margin-top: 4rem;
+    padding: 2.25rem 1rem 1.25rem;
+    margin-top: 2.5rem;
     border-top: 3px solid var(--emerald-green);
     font-size: 0.92rem;
 }

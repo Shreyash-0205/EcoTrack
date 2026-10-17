@@ -1,155 +1,173 @@
 {% extends 'base.html' %}
 
-{% block title %}About EcoTrack — Architecture & Academic Overview{% endblock %}
+{% block title %}About — EcoTrack{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="text-center max-w-800 mx-auto mb-5">
-        <span class="badge bg-success bg-opacity-25 text-success px-3 py-1 rounded-pill fw-semibold">
-            Academic & Open Source Overview
+<div class="container py-4">
+    <!-- Header -->
+    <div class="text-center mx-auto mb-4" style="max-width: 680px;">
+        <span class="badge bg-success bg-opacity-10 text-success px-3 py-1 rounded-pill fw-semibold">
+            Civic Platform Overview
         </span>
-        <h1 class="fw-bold mt-2">About EcoTrack</h1>
-        <p class="text-muted fs-5">
-            Smart Waste Management and Segregation System developed for the University of Mumbai Engineering Mini-Project on Open Source Software Development.
+        <h2 class="fw-bold mt-2 mb-1">About EcoTrack</h2>
+        <p class="text-muted small">
+            A smart waste management and segregation system designed to empower communities and support cleaner urban environments.
         </p>
     </div>
 
-    <div class="row g-4">
-        <!-- Project Summary -->
-        <div class="col-lg-8">
-            <div class="card-modern p-4 mb-4 shadow-sm bg-white">
-                <h4 class="fw-bold text-success mb-3"><i class="bi bi-bullseye me-2"></i> Problem Statement & Vision</h4>
-                <p class="text-muted">
-                    Rapid urban population growth across Indian metropolitan areas like Greater Mumbai has resulted in escalating municipal solid waste generation. Inadequate source segregation and delayed response to localized garbage dumping exacerbate environmental pollution, block monsoon drains, and compromise public health.
-                </p>
-                <p class="text-muted">
-                    <strong>EcoTrack</strong> provides a full-stack, transparent, and accessible civic platform enabling citizens to report garbage hotspots, categorize waste streams (Wet, Dry, Plastic, E-waste, Mixed), visualize civic hotspots via open-source OpenStreetMap layers, and monitor municipal progress from report triage to verified ground resolution.
-                </p>
-            </div>
+    <!-- Problem Statement & Vision (Shortened & Focused) -->
+    <div class="card-modern p-4 mb-4 shadow-sm bg-white border-start border-4 border-success">
+        <h5 class="fw-bold text-success mb-2">
+            <i class="bi bi-bullseye me-2"></i> Problem Statement &amp; Vision
+        </h5>
+        <p class="text-muted mb-0">
+            Rapid urbanization creates severe municipal waste challenges, including unsegregated disposal, overflowing street bins, and delayed cleanup responses. <strong>EcoTrack</strong> provides a centralized, transparent platform connecting citizens with municipal sanitation teams. Citizens report localized hotspots with waste categorization and coordinates, while administrators triage complaints, assign cleanup crews, and track progress to verified resolution.
+        </p>
+    </div>
 
-            <!-- Tech Stack & Open Source Architecture -->
-            <div class="card-modern p-4 mb-4 shadow-sm bg-white">
-                <h4 class="fw-bold text-dark mb-3"><i class="bi bi-stack me-2"></i> Open Source Technology Stack</h4>
-                <div class="table-responsive">
-                    <table class="table table-bordered align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Component</th>
-                                <th>Technology</th>
-                                <th>License / Ecosystem</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Backend Framework</strong></td>
-                                <td>Python 3.13 with Flask 3.1</td>
-                                <td><span class="badge bg-secondary">BSD-3-Clause</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Database</strong></td>
-                                <td>SQLite with SQLAlchemy ORM</td>
-                                <td><span class="badge bg-secondary">Public Domain / MIT</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Geospatial Mapping</strong></td>
-                                <td>Leaflet.js 1.9 &amp; OpenStreetMap Tiles</td>
-                                <td><span class="badge bg-secondary">BSD-2-Clause / ODbL</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Data Analytics &amp; Visuals</strong></td>
-                                <td>Chart.js 4.4</td>
-                                <td><span class="badge bg-secondary">MIT</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Frontend &amp; Responsive UI</strong></td>
-                                <td>HTML5, CSS3, JavaScript, Bootstrap 5.3</td>
-                                <td><span class="badge bg-secondary">MIT</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Automated Testing</strong></td>
-                                <td>pytest with Flask Test Client</td>
-                                <td><span class="badge bg-secondary">MIT</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <!-- Key Features (4 Functional Cards) -->
+    <div class="mb-4">
+        <h5 class="fw-bold text-dark mb-3">
+            <i class="bi bi-stars text-primary me-2"></i> Key Features
+        </h5>
+        <div class="row g-3">
+            <!-- 1. Waste Reporting -->
+            <div class="col-md-6">
+                <div class="card-modern p-3 h-100 shadow-sm bg-white">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="rounded-circle bg-success bg-opacity-10 text-success p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                            <i class="bi bi-camera-fill fs-5"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold text-dark mb-1">Waste Reporting</h6>
+                            <p class="small text-muted mb-0">
+                                Submit waste hotspots with descriptive landmarks, waste stream classification, optional photos, and precise GPS coordinates via device geolocation or an interactive map pin.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Team Contribution Matrix -->
-            <div class="card-modern p-4 shadow-sm bg-white">
-                <h4 class="fw-bold text-dark mb-3"><i class="bi bi-people-fill me-2"></i> Student Engineering Team Matrix</h4>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Role</th>
-                                <th>Key Responsibilities</th>
-                                <th>Assigned Member</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Student 1</strong><br><small class="text-muted">Backend &amp; Database</small></td>
-                                <td>Flask application factory, SQLAlchemy ORM schema, SQLite relational structure, user session management, password hashing.</td>
-                                <td><span class="badge bg-light text-dark border">Student Lead</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Student 2</strong><br><small class="text-muted">Frontend &amp; Accessibility</small></td>
-                                <td>Bootstrap 5 UI/UX design, WCAG-compliant color contrasts, responsive views, educational waste segregation guide, forms.</td>
-                                <td><span class="badge bg-light text-dark border">Co-Developer</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Student 3</strong><br><small class="text-muted">Testing, Security &amp; Docs</small></td>
-                                <td>pytest test suite, safe file upload validation, CSRF protection, Mumbai University project documentation and logbooks.</td>
-                                <td><span class="badge bg-light text-dark border">QA &amp; Documentation</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Student 4</strong><br><small class="text-muted">Maps, Analytics &amp; Integration</small></td>
-                                <td>Leaflet.js OpenStreetMap integration, dynamic markers, GPS coordinate picker, Chart.js metrics, API endpoints.</td>
-                                <td><span class="badge bg-light text-dark border">Full-Stack Integrator</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- 2. Segregation Guide -->
+            <div class="col-md-6">
+                <div class="card-modern p-3 h-100 shadow-sm bg-white">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="rounded-circle bg-primary bg-opacity-10 text-primary p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                            <i class="bi bi-journal-check fs-5"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold text-dark mb-1">Segregation Guide</h6>
+                            <p class="small text-muted mb-0">
+                                Comprehensive educational reference detailing Wet, Dry, Plastic, E-waste, and Hazardous waste streams with practical disposal advice adaptable to local municipal guidelines.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="small text-muted mt-2">
-                    <em>*Note: For a team of 3 students, Student 4's responsibilities merge with Student 1 (API & Analytics) and Student 2 (Leaflet Frontend).</em>
+            </div>
+
+            <!-- 3. Interactive Hotspot Map -->
+            <div class="col-md-6">
+                <div class="card-modern p-3 h-100 shadow-sm bg-white">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="rounded-circle bg-emerald bg-opacity-10 text-success p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                            <i class="bi bi-map-fill fs-5"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold text-dark mb-1">Interactive Hotspot Map</h6>
+                            <p class="small text-muted mb-0">
+                                OpenStreetMap integration using Leaflet.js displaying reported hotspots with status-colored pins, popups, and instant filters by category and resolution status.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Dashboard & Report Tracking -->
+            <div class="col-md-6">
+                <div class="card-modern p-3 h-100 shadow-sm bg-white">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="rounded-circle bg-warning bg-opacity-10 text-warning p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                            <i class="bi bi-speedometer2 fs-5"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold text-dark mb-1">Dashboard &amp; Report Tracking</h6>
+                            <p class="small text-muted mb-0">
+                                Personal dashboard with status tracking (Reported, In Progress, Resolved) and Chart.js analytics, alongside an administrative triage console and immutable audit logs.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Sidebar / Credentials & Project Guidelines -->
-        <div class="col-lg-4">
-            <!-- Academic Info -->
-            <div class="card-modern p-4 mb-4 shadow-sm bg-white border-start border-4 border-success">
-                <h6 class="fw-bold text-dark mb-2">University Information</h6>
-                <ul class="list-unstyled small text-muted mb-0">
-                    <li class="mb-2"><strong>Institution:</strong> University of Mumbai</li>
-                    <li class="mb-2"><strong>Course:</strong> Bachelor of Engineering (B.E.)</li>
-                    <li class="mb-2"><strong>Semester:</strong> Semester VII</li>
-                    <li class="mb-2"><strong>Lab:</strong> Open Source Software Development</li>
-                    <li><strong>Academic Year:</strong> 2026</li>
-                </ul>
-            </div>
-
-            <!-- Demo Access Helper Card -->
-            <div class="card-modern p-4 shadow-sm bg-white border-start border-4 border-primary">
-                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-key-fill text-primary me-1"></i> Demonstration Credentials</h6>
-                <p class="small text-muted mb-3">
-                    Use these pre-seeded accounts to explore both Citizen and Administrative workflows:
-                </p>
-                <div class="bg-light p-3 rounded-3 small mb-2">
-                    <strong class="text-danger">Administrator Account:</strong><br>
-                    Email: <code>admin@ecotrack.org</code><br>
-                    Password: <code>AdminPassword123</code>
+    <!-- Compact Open Source Technology Stack Grid -->
+    <div class="card-modern p-4 shadow-sm bg-white">
+        <h5 class="fw-bold text-dark mb-3">
+            <i class="bi bi-cpu me-2 text-secondary"></i> Built with Open-Source Technologies
+        </h5>
+        <div class="row g-3">
+            <div class="col-lg-4 col-sm-6">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <div class="fw-semibold text-dark small mb-1">
+                        <i class="bi bi-code-slash text-success me-1"></i> Python 3 &amp; Flask 3.1
+                    </div>
+                    <div class="text-muted" style="font-size: 0.82rem;">
+                        Modular backend application factory, routes, and session authentication.
+                    </div>
                 </div>
-                <div class="bg-light p-3 rounded-3 small">
-                    <strong class="text-success">Citizen Account:</strong><br>
-                    Email: <code>citizen@ecotrack.org</code><br>
-                    Password: <code>CitizenPassword123</code>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <div class="fw-semibold text-dark small mb-1">
+                        <i class="bi bi-database text-primary me-1"></i> SQLite &amp; SQLAlchemy
+                    </div>
+                    <div class="text-muted" style="font-size: 0.82rem;">
+                        Relational data modeling, parameterized queries, and referential cascades.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <div class="fw-semibold text-dark small mb-1">
+                        <i class="bi bi-geo-alt text-danger me-1"></i> Leaflet.js &amp; OpenStreetMap
+                    </div>
+                    <div class="text-muted" style="font-size: 0.82rem;">
+                        Interactive client-side maps and spatial markers without paid API dependencies.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <div class="fw-semibold text-dark small mb-1">
+                        <i class="bi bi-pie-chart text-warning me-1"></i> Chart.js 4.4
+                    </div>
+                    <div class="text-muted" style="font-size: 0.82rem;">
+                        Dynamic doughnut and status funnel visualizations on citizen and admin dashboards.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <div class="fw-semibold text-dark small mb-1">
+                        <i class="bi bi-layout-text-window text-info me-1"></i> Bootstrap 5.3 &amp; CSS3
+                    </div>
+                    <div class="text-muted" style="font-size: 0.82rem;">
+                        Responsive layouts, accessible color contrast, and custom eco styling.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="p-3 rounded-3 bg-light border h-100">
+                    <div class="fw-semibold text-dark small mb-1">
+                        <i class="bi bi-shield-check text-success me-1"></i> pytest &amp; Pillow
+                    </div>
+                    <div class="text-muted" style="font-size: 0.82rem;">
+                        Automated test suite (34 tests) and binary image validation for safe uploads.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
-

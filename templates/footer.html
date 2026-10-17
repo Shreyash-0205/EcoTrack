@@ -2,61 +2,45 @@
     <div class="container">
         <div class="row gy-4">
             <!-- Brand & Mission -->
-            <div class="col-lg-4 col-md-6">
-                <div class="d-flex align-items-center gap-2 mb-3">
-                    <i class="bi bi-recycle fs-3 text-success"></i>
+            <div class="col-lg-6 col-md-7">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="bi bi-recycle fs-4 text-success"></i>
                     <h5 class="text-white mb-0 fw-bold">EcoTrack</h5>
                 </div>
-                <p class="small text-light text-opacity-75 mb-3">
-                    Smart Waste Management and Segregation System empowering citizens to report garbage hotspots, categorize waste streams, and collaborate transparently with municipal authorities for cleaner, healthier neighborhoods.
+                <p class="small text-light text-opacity-75 mb-2" style="max-width: 520px;">
+                    Smart Waste Management and Segregation System empowering citizens and municipal authorities to collaborate transparently for cleaner, healthier neighborhoods.
                 </p>
-                <div class="d-flex gap-2">
-                    <span class="badge bg-success bg-opacity-25 text-success border border-success">
-                        <i class="bi bi-shield-check"></i> Open Source (MIT)
-                    </span>
-                    <span class="badge bg-primary bg-opacity-25 text-info border border-info">
-                        <i class="bi bi-mortarboard"></i> University of Mumbai
-                    </span>
+                <div class="small text-success text-opacity-85 fw-semibold">
+                    <i class="bi bi-mortarboard me-1"></i> An academic mini-project developed for the University of Mumbai.
                 </div>
             </div>
 
             <!-- Quick Navigation -->
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-3 col-md-5 col-sm-6">
                 <h6 class="footer-heading">Quick Links</h6>
                 <ul class="footer-links">
                     <li><a href="{{ url_for('main.index') }}"><i class="bi bi-chevron-right small me-1"></i> Home</a></li>
                     <li><a href="{{ url_for('main.segregation_guide') }}"><i class="bi bi-chevron-right small me-1"></i> Segregation Guide</a></li>
                     <li><a href="{{ url_for('main.map_view') }}"><i class="bi bi-chevron-right small me-1"></i> Hotspot Map</a></li>
-                    <li><a href="{{ url_for('main.about') }}"><i class="bi bi-chevron-right small me-1"></i> Architecture & Team</a></li>
+                    <li><a href="{{ url_for('main.about') }}"><i class="bi bi-chevron-right small me-1"></i> About Project</a></li>
                 </ul>
             </div>
 
-            <!-- Segregation Streams -->
-            <div class="col-lg-3 col-md-6">
-                <h6 class="footer-heading">Segregation Streams</h6>
-                <ul class="footer-links">
-                    <li><a href="{{ url_for('main.segregation_guide') }}#wet-waste"><span class="badge bg-success me-2">Wet</span> Kitchen & Garden Organics</a></li>
-                    <li><a href="{{ url_for('main.segregation_guide') }}#dry-waste"><span class="badge bg-primary me-2">Dry</span> Paper, Cardboard & Metals</a></li>
-                    <li><a href="{{ url_for('main.segregation_guide') }}#plastic-waste"><span class="badge bg-warning text-dark me-2">Plastic</span> Bottles, Films & Wrappers</a></li>
-                    <li><a href="{{ url_for('main.segregation_guide') }}#ewaste"><span class="badge bg-purple text-white me-2" style="background-color: #9333ea;">E-waste</span> Electronics & Cables</a></li>
-                </ul>
-            </div>
-
-            <!-- Academic Attribution -->
-            <div class="col-lg-3 col-md-6">
-                <h6 class="footer-heading">Academic Project</h6>
+            <!-- Open Source & Licensing -->
+            <div class="col-lg-3 col-md-12 col-sm-6">
+                <h6 class="footer-heading">Open Source</h6>
                 <p class="small text-light text-opacity-75 mb-2">
-                    Built for University of Mumbai Semester 7 Engineering Mini-Project on Open Source Software Development.
+                    Built using free and open-source software including Flask, SQLite, Leaflet.js, OpenStreetMap, and Chart.js.
                 </p>
-                <div class="small text-light text-opacity-75">
-                    <strong>Tech Stack:</strong> Python Flask, SQLite, Leaflet.js, OpenStreetMap, Chart.js, Bootstrap 5.
-                </div>
+                <span class="badge bg-success bg-opacity-25 text-success border border-success">
+                    <i class="bi bi-shield-check"></i> MIT Licensed
+                </span>
             </div>
         </div>
 
         <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center small text-light text-opacity-75">
             <div>
-                &copy; {{ current_year }} <strong>EcoTrack</strong>. Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" class="text-white text-decoration-underline">MIT License</a>.
+                &copy; {{ current_year }} <strong>EcoTrack</strong>. Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-underline">MIT License</a>.
             </div>
             <div class="mt-2 mt-md-0">
                 <span>Designed for clean cities and transparent civic governance.</span>
@@ -64,4 +48,3 @@
         </div>
     </div>
 </footer>
-
