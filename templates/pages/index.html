@@ -183,8 +183,12 @@
                     <div class="card-modern h-100 d-flex flex-column">
                         <div class="report-card-media fallback-bg-{{ report.category_slug }}">
                             {% if report.has_valid_image %}
-                                <span class="media-type-badge">
-                                    <i class="bi bi-camera-fill"></i> Photo
+                                <span class="media-type-badge media-type-evidence" title="Authenticated citizen-uploaded photograph">
+                                    <i class="bi bi-camera-fill"></i> Uploaded Photo
+                                </span>
+                            {% else %}
+                                <span class="media-type-badge media-type-sample" title="Demonstration reference photograph (royalty-free Unsplash stock)">
+                                    <i class="bi bi-image"></i> Sample Photo
                                 </span>
                             {% endif %}
                             <img src="{{ report.display_image_url }}" 
@@ -196,7 +200,12 @@
 
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge {{ report.status_badge_class }}">{{ report.status }}</span>
+                                <div>
+                                    <span class="badge {{ report.status_badge_class }}">{{ report.status }}</span>
+                                    {% if report.is_demo %}
+                                        <span class="badge badge-demo ms-1" title="Demonstration mock record">DEMO</span>
+                                    {% endif %}
+                                </div>
                                 <span class="badge {{ report.category_badge_class }}">{{ report.category }}</span>
                             </div>
 

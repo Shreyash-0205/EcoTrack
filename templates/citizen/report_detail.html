@@ -62,15 +62,32 @@
                 <!-- Hotspot Visual / Photo -->
                 <div class="mb-4">
                     <h6 class="fw-bold text-dark mb-2">
-                        <i class="bi {% if report.has_valid_image %}bi-camera{% else %}bi-image{% endif %} me-1"></i> 
-                        {% if report.has_valid_image %}Photographic Evidence:{% else %}Waste Stream Category:{% endif %}
+                        <i class="bi {% if report.has_valid_image %}bi-camera-fill text-success{% else %}bi-image text-muted{% endif %} me-1"></i> 
+                        {% if report.has_valid_image %}Photographic Evidence (Citizen Upload):{% else %}Demonstration Reference Photograph:{% endif %}
                     </h6>
                     <div class="report-detail-media fallback-bg-{{ report.category_slug }}">
+                        {% if report.has_valid_image %}
+                            <span class="media-type-badge media-type-evidence">
+                                <i class="bi bi-camera-fill"></i> Uploaded Photo Evidence
+                            </span>
+                        {% else %}
+                            <span class="media-type-badge media-type-sample">
+                                <i class="bi bi-image"></i> Sample Demonstration Photo
+                            </span>
+                        {% endif %}
                         <img src="{{ report.display_image_url }}" 
                              onerror="this.onerror=null; this.src='{{ report.fallback_image_url }}';" 
                              alt="{{ report.title }}" 
                              class="report-detail-image">
                     </div>
+                    {% if not report.has_valid_image %}
+                        <div class="alert alert-light border small text-muted d-flex align-items-center gap-2 mt-2 mb-0 py-2">
+                            <i class="bi bi-info-circle text-primary fs-5"></i>
+                            <div>
+                                <strong>Demonstration Sample Photo:</strong> Illustrative waste reference image sourced from royalty-free photography (Unsplash). Not photographic evidence of an actual incident.
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <!-- Admin Notes / Civic Resolution Updates -->

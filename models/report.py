@@ -103,11 +103,37 @@ class Report(db.Model):
         return True
 
     @property
+    def sample_photo_filename(self) -> str:
+        """Return the appropriate realistic sample photograph filename."""
+        content_lower = f"{self.title or ''} {self.description or ''} {self.location or ''}".lower()
+        if "monitor" in content_lower or "crt" in content_lower or "screen" in content_lower:
+            return "discarded_monitors.jpg"
+        if "battery" in content_lower or "batteries" in content_lower:
+            return "discarded_batteries.jpg"
+        if ("dustbin" in content_lower or "dust bin" in content_lower or "community dustbin" in content_lower) and self.category == "Mixed":
+            return "mixed_dustbin_waste.jpg"
+        
+        category_map = {
+            'Wet': 'wet_organic_waste.jpg',
+            'Dry': 'cardboard_recycling.jpg',
+            'Plastic': 'plastic_beach_litter.jpg',
+            'E-waste': 'discarded_batteries.jpg',
+            'Mixed': 'mixed_garbage_public.jpg',
+            'Other': 'construction_debris.jpg'
+        }
+        return category_map.get(self.category, 'mixed_garbage_public.jpg')
+
+    @property
+    def sample_image_url(self) -> str:
+        """Return local static URL for realistic waste photograph."""
+        return f"/static/images/photos/{self.sample_photo_filename}"
+
+    @property
     def display_image_url(self) -> str:
-        """Return the uploaded image URL if it exists on disk, else the category fallback."""
+        """Return the uploaded image URL if it exists on disk, else the realistic sample photograph."""
         if self.has_valid_image:
             return f"/uploads/reports/{self.image_filename}"
-        return self.fallback_image_url
+        return self.sample_image_url
 
     def to_dict(self) -> dict:
         """Serialize report to dictionary for API and map visualization."""
@@ -127,8 +153,10 @@ class Report(db.Model):
             'has_coordinates': self.has_coordinates,
             'image_filename': self.image_filename,
             'image_url': self.display_image_url,
+            'sample_image_url': self.sample_image_url,
             'fallback_image_url': self.fallback_image_url,
             'has_uploaded_image': self.has_valid_image,
+            'is_sample_image': not self.has_valid_image,
             'status': self.status,
             'admin_notes': self.admin_notes,
             'is_demo': self.is_demo,

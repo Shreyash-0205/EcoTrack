@@ -164,25 +164,29 @@ def test_category_fallback_images_and_rendering(auth_citizen_client, app, sample
         db.session.commit()
         no_photo_id = report_no_photo.id
 
-        # Verify model fallback properties
+        # Verify model sample photo and fallback properties
         assert report_no_photo.category_slug == 'wet'
         assert report_no_photo.fallback_image_url == '/static/images/fallbacks/wet.svg'
         assert report_no_photo.has_valid_image is False
-        assert report_no_photo.display_image_url == '/static/images/fallbacks/wet.svg'
+        assert report_no_photo.sample_photo_filename == 'wet_organic_waste.jpg'
+        assert report_no_photo.display_image_url == '/static/images/photos/wet_organic_waste.jpg'
 
-        # Verify fallback SVG file physically exists on disk
+        # Verify photo and fallback SVG files physically exist on disk
+        photo_path = os.path.join(app.root_path, 'static', 'images', 'photos', 'wet_organic_waste.jpg')
+        assert os.path.isfile(photo_path)
         svg_path = os.path.join(app.root_path, 'static', 'images', 'fallbacks', 'wet.svg')
         assert os.path.isfile(svg_path)
 
-    # Test report detail page displays fallback and no 'No photo attached' placeholder
+    # Test report detail page displays sample photo and no 'No photo attached' placeholder
     detail_resp = auth_citizen_client.get(f'/reports/{no_photo_id}')
     assert detail_resp.status_code == 200
     assert b'No photo attached' not in detail_resp.data
+    assert b'wet_organic_waste.jpg' in detail_resp.data
     assert b'/static/images/fallbacks/wet.svg' in detail_resp.data
 
-    # Test my-reports table page displays fallback thumbnail
+    # Test my-reports table page displays sample photo thumbnail
     my_resp = auth_citizen_client.get('/my-reports')
     assert my_resp.status_code == 200
     assert b'No photo attached' not in my_resp.data
-    assert b'/static/images/fallbacks/wet.svg' in my_resp.data
+    assert b'wet_organic_waste.jpg' in my_resp.data
 
