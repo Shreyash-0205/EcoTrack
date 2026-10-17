@@ -98,3 +98,4 @@ def serve_uploaded_image(filename):
         abort(404)
 
     return send_from_directory(str(upload_dir), filename)
+

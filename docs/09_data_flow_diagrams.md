@@ -73,3 +73,4 @@ flowchart TD
 - **Report Record:** `{id, user_id, title, description, category, location, latitude, longitude, image_filename, status, admin_notes, is_demo, created_at, updated_at}`
 - **Activity Log Record:** `{id, admin_user_id, report_id, action, details, created_at}`
 - **Uploaded Image Payload:** `{uuid_filename, raw_bytes, mime_type, file_size}`
+

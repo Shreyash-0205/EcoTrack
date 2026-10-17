@@ -28,3 +28,4 @@ EcoTrack serves as an exemplary foundation for scalable civic tech research, enc
 12. pytest: Simple Powerful Testing with Python, Holger Krekel et al.: `https://docs.pytest.org/`
 13. Pillow (PIL Fork) Documentation, Alex Clark et al.: `https://python-pillow.org/`
 14. Contributor Covenant Code of Conduct (v2.1): `https://www.contributor-covenant.org/`
+

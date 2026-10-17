@@ -92,3 +92,4 @@ class Report(db.Model):
 
     def __repr__(self) -> str:
         return f"<Report id={self.id} title='{self.title}' status='{self.status}'>"
+

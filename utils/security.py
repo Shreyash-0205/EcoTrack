@@ -116,3 +116,4 @@ def save_uploaded_image(file_storage, upload_folder: str, allowed_extensions: se
         return True, unique_name
     except Exception as e:
         return False, f"Failed to save image securely: {str(e)}"
+

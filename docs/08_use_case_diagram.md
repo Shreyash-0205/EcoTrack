@@ -65,3 +65,4 @@ flowchart LR
   3. Administrator changes status to `In Progress` or `Resolved` and enters field action notes (e.g., "Assigned to Ward G/North cleanup crew").
   4. System updates report record, modifies `updated_at` timestamp, and automatically generates an `ActivityLog` entry.
 - **Postconditions:** Citizen and public map views reflect updated status and notes immediately.
+

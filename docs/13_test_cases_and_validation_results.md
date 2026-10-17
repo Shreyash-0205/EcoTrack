@@ -49,3 +49,4 @@
 | **TC-32** | `test_db` | Role `is_admin` property | `role == 'admin'` vs `role == 'citizen'` | True for admin, False for citizen | Accurately evaluated | **PASS** |
 | **TC-33** | `test_db` | Coordinate property logic | Valid vs None vs out-of-range coordinates | `has_coordinates` evaluates correctly | Accurate boolean | **PASS** |
 | **TC-34** | `test_db` | Cascade log deletion | Delete parent Report | Child `ActivityLog` deleted via cascade | Log removed cleanly | **PASS** |
+

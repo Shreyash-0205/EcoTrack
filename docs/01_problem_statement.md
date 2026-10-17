@@ -18,3 +18,4 @@ In metropolitan areas such as Mumbai, solid waste generation exceeds 10,000 metr
 
 ## 1.3 Problem Definition
 To design, develop, and test an open-source, full-stack web application—**EcoTrack: Smart Waste Management and Segregation System**—that enables citizens to report waste hotspots with category tags, landmarks, GPS coordinates, and photographs, while empowering municipal administrators to triage, assign, update, and audit cleanup progress transparently using open-source mapping and analytics tools without reliance on proprietary paid APIs.
+

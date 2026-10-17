@@ -27,3 +27,4 @@
 - Hardware-based IoT fill-level sensors in municipal smart bins (simulated via citizen reports).
 - Payment gateways for municipal sanitation fines or commercial recycling transactions.
 - Automated satellite image classification (relies on crowd-sourced photographs).
+

@@ -26,3 +26,4 @@ EcoTrack establishes a modern, transparent, community-driven civic platform:
 | **Visual Verification** | Secure photo upload pipeline with Pillow binary validation. | Prevents malware execution while providing visual verification to authorities. |
 | **Operational Audit** | Immutable administrative activity log with timestamps. | Enforces civic accountability for every status transition and note. |
 | **Education Module** | Integrated Waste Segregation Guide. | Promotes scientific segregation at source with local municipal adaptability notes. |
+

@@ -46,3 +46,4 @@ If you discover a potential security flaw in EcoTrack:
 2. Email a detailed vulnerability advisory to `security@ecotrack.local` or the student project lead.
 3. Include steps to reproduce the vulnerability, proof-of-concept payloads, and the affected version.
 4. We acknowledge reports within 48 hours and work toward a coordinated fix.
+

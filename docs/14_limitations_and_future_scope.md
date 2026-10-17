@@ -36,3 +36,4 @@ While EcoTrack delivers a fully functional, tested, and secure prototype, severa
 
 5. **Multi-Lingual Localization (i18n):**
    Introduce localized user interfaces in Marathi and Hindi using Flask-Babel to maximize adoption across regional ward populations.
+

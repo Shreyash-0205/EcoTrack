@@ -272,3 +272,4 @@ For academic evaluation under the University of Mumbai Bachelor of Engineering c
 ## 9. License
 
 This project is open-source software licensed under the terms of the [MIT License](LICENSE). Third-party libraries (Flask, Bootstrap, Leaflet, Chart.js, Pillow, pytest) are used in accordance with their respective open-source licenses.
+

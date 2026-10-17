@@ -108,3 +108,4 @@ CREATE INDEX ix_activity_logs_created_at ON activity_logs (created_at);
 ## 10.3 Referential Integrity and Optimization
 - **Cascade Deletion:** If a user account is deleted, personal reports are cascaded safely. If a report is deleted, all dependent audit logs are purged or disassociated without leaving orphaned foreign key violations.
 - **Indexes:** Strategic B-tree indexes are maintained on `reports.status`, `reports.category`, and `users.email` to guarantee sub-millisecond query responses under multi-user access.
+

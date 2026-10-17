@@ -85,3 +85,4 @@ As part of the University of Mumbai open-source engineering curriculum, student 
   - Translating educational environmental guides into regional Indian languages (Hindi, Marathi).
 
 > **Academic Ethics Notice:** Students must never claim that a pull request, issue, or contribution has been submitted unless genuine pull request links and commits exist on GitHub. Authentic contributions should be verified by project mentors before inclusion in final examination portfolios.
+

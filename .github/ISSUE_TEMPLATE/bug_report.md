@@ -30,3 +30,4 @@ If applicable, add screenshots, Leaflet map errors, or server terminal logs to h
 
 **Additional Context**
 Add any other context about the problem here (e.g., GPS coordinates format, image file size, municipal ward).
+

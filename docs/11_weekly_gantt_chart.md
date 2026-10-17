@@ -31,3 +31,4 @@ flowchart LR
 | **Week 6** | **Administrative Console & Audit Trail** | Develop admin dashboard, status triage workflow (Reported &rarr; In Progress &rarr; Resolved), field notes modal, and automated `ActivityLog` logging. | Student 1 & Student 4 |
 | **Week 7** | **Analytics, Testing & Accessibility** | Integrate Chart.js doughnut and bar charts; develop 34 automated unit and integration tests using `pytest`; conduct WCAG accessibility review. | Student 3 (Testing Lead) |
 | **Week 8** | **Documentation & University Defense** | Compile Mumbai University project report, weekly logbook records, demo seed scripts, user manual, and deliver project defense presentation. | All Students (Coordinated by Student 3) |
+

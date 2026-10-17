@@ -149,3 +149,4 @@ def test_logout(client, sample_users):
     assert b"You have been successfully logged out" in response.data
     with client.session_transaction() as sess:
         assert 'user_id' not in sess
+

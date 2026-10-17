@@ -73,3 +73,4 @@ def map_view():
 def about():
     """About page outlining the project background, university context, and architecture."""
     return render_template('pages/about.html')
+

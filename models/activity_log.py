@@ -31,3 +31,4 @@ class ActivityLog(db.Model):
 
     def __repr__(self) -> str:
         return f"<ActivityLog id={self.id} action='{self.action}' admin_id={self.admin_user_id}>"
+

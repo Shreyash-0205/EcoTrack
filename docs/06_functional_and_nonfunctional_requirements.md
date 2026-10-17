@@ -39,3 +39,4 @@
   The entire architecture must function without proprietary paid APIs (using OpenStreetMap instead of Google Maps, SQLite instead of commercial cloud DBs).
 - **NFR-06: Testability:**
   Core workflows must be covered by automated test scripts executable via `pytest` with reproducible test assertions.
+

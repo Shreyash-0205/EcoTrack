@@ -15,3 +15,4 @@ Briefly explain the rationale and design behind this pull request. Link relevant
 - [ ] I have added tests that prove my fix is effective or that my feature works.
 - [ ] New and existing automated tests pass locally (`pytest`).
 - [ ] No sensitive credentials, private keys, or debug configurations have been committed.
+

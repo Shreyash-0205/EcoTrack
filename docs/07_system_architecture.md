@@ -67,3 +67,4 @@ flowchart TD
    - **SQLAlchemy ORM:** Provides an abstraction layer with parameterized queries, preventing SQL injection vulnerabilities.
    - **SQLite Database:** Zero-configuration, serverless, atomic SQL database engine stored in local file `ecotrack.db`.
    - **Uploads Directory:** Dedicated physical storage directory for user-submitted photographs with unique UUID identifiers.
+

@@ -142,3 +142,4 @@ def test_api_reports_filtering(client, app, sample_users):
     data_plastic = res_plastic.get_json()
     assert data_plastic['count'] == 1
     assert data_plastic['reports'][0]['title'] == 'Plastic in Colaba'
+

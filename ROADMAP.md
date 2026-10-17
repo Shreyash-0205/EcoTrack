@@ -41,3 +41,4 @@ This roadmap outlines current accomplishments and future milestones for the **Ec
 - [ ] **Progressive Web App (PWA):** Service worker caching and offline report storage using browser `IndexedDB`.
 - [ ] **Automatic Background Sync:** Queue reports captured in low-reception basement or alleyway areas and upload when network connectivity restores.
 - [ ] **Route Optimization for Collection Trucks:** Graph-based traveling salesperson route calculation between confirmed hotspots using open-source OpenRouteService / OSRM.
+

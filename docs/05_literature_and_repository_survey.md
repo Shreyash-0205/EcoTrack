@@ -28,3 +28,4 @@
 | **FixMyStreet (mySociety)** | Civic street and infrastructure reporting | Perl, PostgreSQL, Leaflet | `https://github.com/mysociety/fixmystreet` | Validated the utility of public status transitions (Reported &rarr; In Progress &rarr; Fixed) for citizen trust. |
 
 > **Academic Ethics Note:** The repositories surveyed above are real, established open-source projects. URLs and technical stacks have been verified. Students referencing these repositories for semester lab submissions should inspect open issues and contribute documentation or test improvements following upstream guidelines.
+
