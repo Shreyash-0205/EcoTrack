@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}About EcoTrack — Architecture & Academic Overview{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center max-w-800 mx-auto mb-5">
+        <span class="badge bg-success bg-opacity-25 text-success px-3 py-1 rounded-pill fw-semibold">
+            Academic & Open Source Overview
+        </span>
+        <h1 class="fw-bold mt-2">About EcoTrack</h1>
+        <p class="text-muted fs-5">
+            Smart Waste Management and Segregation System developed for the University of Mumbai Engineering Mini-Project on Open Source Software Development.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Project Summary -->
+        <div class="col-lg-8">
+            <div class="card-modern p-4 mb-4 shadow-sm bg-white">
+                <h4 class="fw-bold text-success mb-3"><i class="bi bi-bullseye me-2"></i> Problem Statement & Vision</h4>
+                <p class="text-muted">
+                    Rapid urban population growth across Indian metropolitan areas like Greater Mumbai has resulted in escalating municipal solid waste generation. Inadequate source segregation and delayed response to localized garbage dumping exacerbate environmental pollution, block monsoon drains, and compromise public health.
+                </p>
+                <p class="text-muted">
+                    <strong>EcoTrack</strong> provides a full-stack, transparent, and accessible civic platform enabling citizens to report garbage hotspots, categorize waste streams (Wet, Dry, Plastic, E-waste, Mixed), visualize civic hotspots via open-source OpenStreetMap layers, and monitor municipal progress from report triage to verified ground resolution.
+                </p>
+            </div>
+
+            <!-- Tech Stack & Open Source Architecture -->
+            <div class="card-modern p-4 mb-4 shadow-sm bg-white">
+                <h4 class="fw-bold text-dark mb-3"><i class="bi bi-stack me-2"></i> Open Source Technology Stack</h4>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Component</th>
+                                <th>Technology</th>
+                                <th>License / Ecosystem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Backend Framework</strong></td>
+                                <td>Python 3.13 with Flask 3.1</td>
+                                <td><span class="badge bg-secondary">BSD-3-Clause</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Database</strong></td>
+                                <td>SQLite with SQLAlchemy ORM</td>
+                                <td><span class="badge bg-secondary">Public Domain / MIT</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Geospatial Mapping</strong></td>
+                                <td>Leaflet.js 1.9 &amp; OpenStreetMap Tiles</td>
+                                <td><span class="badge bg-secondary">BSD-2-Clause / ODbL</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Analytics &amp; Visuals</strong></td>
+                                <td>Chart.js 4.4</td>
+                                <td><span class="badge bg-secondary">MIT</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Frontend &amp; Responsive UI</strong></td>
+                                <td>HTML5, CSS3, JavaScript, Bootstrap 5.3</td>
+                                <td><span class="badge bg-secondary">MIT</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Automated Testing</strong></td>
+                                <td>pytest with Flask Test Client</td>
+                                <td><span class="badge bg-secondary">MIT</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Team Contribution Matrix -->
+            <div class="card-modern p-4 shadow-sm bg-white">
+                <h4 class="fw-bold text-dark mb-3"><i class="bi bi-people-fill me-2"></i> Student Engineering Team Matrix</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Role</th>
+                                <th>Key Responsibilities</th>
+                                <th>Assigned Member</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Student 1</strong><br><small class="text-muted">Backend &amp; Database</small></td>
+                                <td>Flask application factory, SQLAlchemy ORM schema, SQLite relational structure, user session management, password hashing.</td>
+                                <td><span class="badge bg-light text-dark border">Student Lead</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Student 2</strong><br><small class="text-muted">Frontend &amp; Accessibility</small></td>
+                                <td>Bootstrap 5 UI/UX design, WCAG-compliant color contrasts, responsive views, educational waste segregation guide, forms.</td>
+                                <td><span class="badge bg-light text-dark border">Co-Developer</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Student 3</strong><br><small class="text-muted">Testing, Security &amp; Docs</small></td>
+                                <td>pytest test suite, safe file upload validation, CSRF protection, Mumbai University project documentation and logbooks.</td>
+                                <td><span class="badge bg-light text-dark border">QA &amp; Documentation</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Student 4</strong><br><small class="text-muted">Maps, Analytics &amp; Integration</small></td>
+                                <td>Leaflet.js OpenStreetMap integration, dynamic markers, GPS coordinate picker, Chart.js metrics, API endpoints.</td>
+                                <td><span class="badge bg-light text-dark border">Full-Stack Integrator</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="small text-muted mt-2">
+                    <em>*Note: For a team of 3 students, Student 4's responsibilities merge with Student 1 (API & Analytics) and Student 2 (Leaflet Frontend).</em>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar / Credentials & Project Guidelines -->
+        <div class="col-lg-4">
+            <!-- Academic Info -->
+            <div class="card-modern p-4 mb-4 shadow-sm bg-white border-start border-4 border-success">
+                <h6 class="fw-bold text-dark mb-2">University Information</h6>
+                <ul class="list-unstyled small text-muted mb-0">
+                    <li class="mb-2"><strong>Institution:</strong> University of Mumbai</li>
+                    <li class="mb-2"><strong>Course:</strong> Bachelor of Engineering (B.E.)</li>
+                    <li class="mb-2"><strong>Semester:</strong> Semester VII</li>
+                    <li class="mb-2"><strong>Lab:</strong> Open Source Software Development</li>
+                    <li><strong>Academic Year:</strong> 2026</li>
+                </ul>
+            </div>
+
+            <!-- Demo Access Helper Card -->
+            <div class="card-modern p-4 shadow-sm bg-white border-start border-4 border-primary">
+                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-key-fill text-primary me-1"></i> Demonstration Credentials</h6>
+                <p class="small text-muted mb-3">
+                    Use these pre-seeded accounts to explore both Citizen and Administrative workflows:
+                </p>
+                <div class="bg-light p-3 rounded-3 small mb-2">
+                    <strong class="text-danger">Administrator Account:</strong><br>
+                    Email: <code>admin@ecotrack.org</code><br>
+                    Password: <code>AdminPassword123</code>
+                </div>
+                <div class="bg-light p-3 rounded-3 small">
+                    <strong class="text-success">Citizen Account:</strong><br>
+                    Email: <code>citizen@ecotrack.org</code><br>
+                    Password: <code>CitizenPassword123</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

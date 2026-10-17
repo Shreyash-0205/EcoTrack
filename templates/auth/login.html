@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Log In — EcoTrack{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="card-modern shadow-lg bg-white p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <div class="rounded-circle bg-success bg-opacity-10 text-success d-inline-flex p-3 mb-2">
+                        <i class="bi bi-shield-lock-fill fs-2"></i>
+                    </div>
+                    <h3 class="fw-bold">Welcome Back</h3>
+                    <p class="text-muted small">Sign in to your EcoTrack citizen or administrative account</p>
+                </div>
+
+                <form method="POST" action="{{ url_for('auth.login') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    {% if next %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold small">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ email or '' }}" placeholder="name@example.com" required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-semibold small">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-key"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-eco w-100 py-2 shadow-sm mb-3">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+                    </button>
+                </form>
+
+                <!-- Demo Credentials Quick Helper -->
+                <div class="bg-light p-3 rounded-3 small border mb-3">
+                    <div class="fw-bold text-dark mb-1"><i class="bi bi-lightning-charge text-warning"></i> Fast Demo Login:</div>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-muted">Admin (MCGM):</span>
+                        <button type="button" class="btn btn-xs btn-outline-danger py-0 px-2" onclick="document.getElementById('email').value='admin@ecotrack.org'; document.getElementById('password').value='AdminPassword123';">
+                            Use Admin
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Citizen (Aarav):</span>
+                        <button type="button" class="btn btn-xs btn-outline-success py-0 px-2" onclick="document.getElementById('email').value='citizen@ecotrack.org'; document.getElementById('password').value='CitizenPassword123';">
+                            Use Citizen
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-center small text-muted">
+                    Don't have an account yet? 
+                    <a href="{{ url_for('auth.register') }}" class="text-success fw-semibold">Register as a citizen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

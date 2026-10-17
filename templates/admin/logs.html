@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}Audit Activity Logs — EcoTrack Administrator{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4 py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+        <div>
+            <span class="badge bg-secondary">AUDIT TRAIL &amp; COMPLIANCE</span>
+            <h2 class="fw-bold mb-1">Administrative Activity Logs</h2>
+            <p class="text-muted mb-0">Immutable record of status modifications, interventions, and report deletions.</p>
+        </div>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Search Toolbar -->
+    <div class="card-modern p-3 mb-4 shadow-sm bg-white">
+        <form method="GET" action="{{ url_for('admin.activity_logs') }}">
+            <div class="row g-2 align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-light text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" name="q" class="form-control" placeholder="Search by action text or admin notes..." value="{{ current_search }}">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 d-flex gap-1">
+                    <button type="submit" class="btn btn-primary-eco btn-sm w-100">
+                        <i class="bi bi-funnel-fill"></i> Filter Logs
+                    </button>
+                    <a href="{{ url_for('admin.activity_logs') }}" class="btn btn-outline-secondary btn-sm" title="Clear Search">
+                        <i class="bi bi-x-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Logs Table -->
+    <div class="card-modern shadow-sm bg-white overflow-hidden mb-4">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 small">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 70px;">Log ID</th>
+                        <th style="width: 170px;">Timestamp (UTC)</th>
+                        <th>Administrator</th>
+                        <th style="width: 120px;">Report ID</th>
+                        <th>Action Performed</th>
+                        <th>Details / Field Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                        <tr>
+                            <td><span class="badge bg-light text-dark border">#{{ log.id }}</span></td>
+                            <td class="text-muted">{{ log.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>
+                                <strong>{{ log.admin_user.name if log.admin_user else 'System Admin' }}</strong>
+                                <div class="text-muted" style="font-size: 0.72rem;">{{ log.admin_user.email if log.admin_user else '' }}</div>
+                            </td>
+                            <td>
+                                {% if log.report_id %}
+                                    <a href="{{ url_for('citizen.report_detail', report_id=log.report_id) }}" class="badge bg-primary text-decoration-none">
+                                        Report #{{ log.report_id }}
+                                    </a>
+                                {% else %}
+                                    <span class="badge bg-secondary">Deleted / N/A</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <strong class="text-dark">{{ log.action }}</strong>
+                            </td>
+                            <td class="text-secondary">
+                                {{ log.details or '—' }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center py-5 text-muted">
+                                No activity log records found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    {% if pagination.pages > 1 %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('admin.activity_logs', page=pagination.prev_num, q=current_search) }}">Previous</a>
+                </li>
+                {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                    {% if page_num %}
+                        <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                            <a class="page-link" href="{{ url_for('admin.activity_logs', page=page_num, q=current_search) }}">{{ page_num }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">…</span></li>
+                    {% endif %}
+                {% endfor %}
+                <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('admin.activity_logs', page=pagination.next_num, q=current_search) }}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}

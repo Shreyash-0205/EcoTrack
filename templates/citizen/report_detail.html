@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ report.title }} — EcoTrack{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}" class="text-success">Home</a></li>
+            {% if is_admin %}
+                <li class="breadcrumb-item"><a href="{{ url_for('admin.manage_reports') }}" class="text-success">Manage Reports</a></li>
+            {% else %}
+                <li class="breadcrumb-item"><a href="{{ url_for('citizen.my_reports') }}" class="text-success">My Reports</a></li>
+            {% endif %}
+            <li class="breadcrumb-item active" aria-current="page">Report #{{ report.id }}</li>
+        </ol>
+    </nav>
+
+    <!-- Main Detail Grid -->
+    <div class="row g-4">
+        <!-- Left Column: Details, Photo, Description -->
+        <div class="col-lg-8">
+            <div class="card-modern shadow-sm bg-white p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="badge {{ report.status_badge_class }} px-3 py-1">{{ report.status }}</span>
+                            <span class="badge {{ report.category_badge_class }} px-3 py-1">{{ report.category }} Waste</span>
+                            {% if report.is_demo %}
+                                <span class="badge badge-demo">DEMONSTRATION RECORD</span>
+                            {% endif %}
+                        </div>
+                        <h2 class="fw-bold mb-1 text-dark">{{ report.title }}</h2>
+                        <div class="text-muted small">
+                            <i class="bi bi-person-circle me-1"></i> Reported by <strong>{{ report.reporter.name if report.reporter else 'Anonymous Citizen' }}</strong>
+                            &bull; <i class="bi bi-clock me-1"></i> {{ report.created_at.strftime('%d %B %Y at %I:%M %p') }}
+                        </div>
+                    </div>
+
+                    {% if is_owner and report.status == 'Reported' %}
+                        <a href="{{ url_for('citizen.edit_report', report_id=report.id) }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-pencil me-1"></i> Edit Report
+                        </a>
+                    {% endif %}
+                </div>
+
+                <hr>
+
+                <!-- Physical Landmark -->
+                <div class="mb-4">
+                    <h6 class="fw-bold text-dark"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Landmark &amp; Physical Address:</h6>
+                    <p class="text-muted mb-0 ps-3 border-start border-3 border-success">{{ report.location }}</p>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4">
+                    <h6 class="fw-bold text-dark"><i class="bi bi-card-text text-primary me-1"></i> Description:</h6>
+                    <div class="p-3 bg-light rounded-3 text-secondary" style="white-space: pre-line;">{{ report.description }}</div>
+                </div>
+
+                <!-- Uploaded Photo -->
+                {% if report.image_filename %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-dark"><i class="bi bi-camera me-1"></i> Photographic Evidence:</h6>
+                        <div class="text-center bg-light p-2 rounded-3 border">
+                            <img src="{{ url_for('api.serve_uploaded_image', filename=report.image_filename) }}" 
+                                 alt="{{ report.title }}" 
+                                 class="report-detail-image">
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!-- Admin Notes / Civic Resolution Updates -->
+                <div class="card-modern p-3 border-start border-4 border-info bg-light">
+                    <h6 class="fw-bold text-dark mb-1"><i class="bi bi-clipboard2-check text-info me-1"></i> Municipal Status &amp; Notes:</h6>
+                    {% if report.admin_notes %}
+                        <p class="mb-1 text-dark">{{ report.admin_notes }}</p>
+                        <small class="text-muted">Last updated on {{ report.updated_at.strftime('%d %b %Y, %H:%M') }}</small>
+                    {% else %}
+                        <p class="mb-0 text-muted small">No administrative notes recorded yet. The complaint is currently queued for field inspection.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Map, Status Controls (if admin), Metadata -->
+        <div class="col-lg-4">
+            <!-- Geographic Location Card -->
+            <div class="card-modern shadow-sm bg-white p-3 mb-4">
+                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-pin-map text-success me-1"></i> Geographic Location</h6>
+                {% if report.has_coordinates %}
+                    <div id="detail-map" class="mb-2"></div>
+                    <div class="small text-muted">
+                        <div><strong>Latitude:</strong> {{ report.latitude }}</div>
+                        <div><strong>Longitude:</strong> {{ report.longitude }}</div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-light border small text-muted mb-0 py-3 text-center">
+                        <i class="bi bi-geo text-secondary fs-3 d-block mb-1"></i>
+                        No GPS coordinates attached for this hotspot. Physical address was provided for field locating.
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Admin Status Update Card (Visible only to Admin) -->
+            {% if is_admin %}
+                <div class="card-modern shadow-sm bg-white p-3 mb-4 border-start border-4 border-warning">
+                    <h6 class="fw-bold text-dark mb-2"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Admin Status Triage</h6>
+                    <form method="POST" action="{{ url_for('admin.update_report_status', report_id=report.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="redirect_to" value="detail">
+
+                        <div class="mb-3">
+                            <label for="admin-status" class="form-label small fw-semibold">Update Status</label>
+                            <select id="admin-status" name="status" class="form-select form-select-sm">
+                                {% for st in ['Reported', 'In Progress', 'Resolved', 'Rejected'] %}
+                                    <option value="{{ st }}" {% if report.status == st %}selected{% endif %}>{{ st }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="admin_notes" class="form-label small fw-semibold">Administrative Field Notes</label>
+                            <textarea id="admin_notes" name="admin_notes" class="form-control form-control-sm" rows="3" placeholder="Action dispatched, ward crew details, resolution notes...">{{ report.admin_notes or '' }}</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary-eco btn-sm w-100">
+                            <i class="bi bi-check-lg me-1"></i> Save Changes &amp; Log Activity
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+
+            <!-- Audit Trail Summary (if admin) -->
+            {% if is_admin and report.activity_logs.count() > 0 %}
+                <div class="card-modern shadow-sm bg-white p-3 mb-4">
+                    <h6 class="fw-bold text-dark mb-2"><i class="bi bi-clock-history text-secondary me-1"></i> Audit Trail History</h6>
+                    <ul class="list-unstyled small mb-0">
+                        {% for log in report.activity_logs.order_by(report.activity_logs.prop.target.created_at.desc()) %}
+                            <li class="mb-2 pb-2 border-bottom">
+                                <div class="fw-semibold text-dark">{{ log.action }}</div>
+                                <div class="text-muted" style="font-size: 0.75rem;">{{ log.created_at.strftime('%d %b %Y, %H:%M') }} by {{ log.admin_user.name if log.admin_user else 'Admin' }}</div>
+                                {% if log.details %}
+                                    <div class="text-secondary mt-1">{{ log.details }}</div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts_extra %}
+{% if report.has_coordinates %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    initDetailMap({{ report.latitude }}, {{ report.longitude }}, {{ report.title|tojson }});
+});
+</script>
+{% endif %}
+{% endblock %}

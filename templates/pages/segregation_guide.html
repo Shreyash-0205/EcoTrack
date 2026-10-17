@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block title %}Waste Segregation Guide — EcoTrack{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center max-w-800 mx-auto mb-5">
+        <span class="badge bg-success bg-opacity-25 text-success px-3 py-1 rounded-pill fw-semibold">
+            Educational Resource
+        </span>
+        <h1 class="fw-bold mt-2">Comprehensive Waste Segregation Guide</h1>
+        <p class="text-muted fs-5">
+            Learn how to classify, separate, and dispose of household and commercial waste to promote resource recovery and protect sanitation workers.
+        </p>
+    </div>
+
+    <!-- Municipal Adaptability Notice Alert -->
+    <div class="alert alert-info border-info card-modern p-4 mb-5 shadow-sm">
+        <div class="d-flex align-items-start gap-3">
+            <i class="bi bi-geo-alt-fill text-primary fs-3 mt-1"></i>
+            <div>
+                <h5 class="fw-bold text-dark mb-1">Local Municipal Guidance Notice</h5>
+                <p class="mb-0 text-muted small">
+                    Waste segregation practices, bin color-coding standards, and collection schedules vary across municipalities and local urban bodies (e.g., Municipal Corporation of Greater Mumbai / MCGM, Pune Municipal Corporation, or Navi Mumbai Municipal Corporation). While the guidelines below follow India's <strong>Solid Waste Management Rules (2016)</strong> and Swachh Bharat guidelines, please verify specific collection timings, bulk waste protocols, and sanitary waste wrapping norms with your local ward office.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stream Cards Grid -->
+    <div class="row g-4">
+        <!-- 1. Wet Waste -->
+        <div class="col-lg-6" id="wet-waste">
+            <div class="guide-card">
+                <div class="guide-card-header guide-wet-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-0">1. Wet & Biodegradable Waste</h4>
+                        <small class="text-white-50">Organic & Compostable Matter • Standard Green Bin</small>
+                    </div>
+                    <i class="bi bi-apple fs-1 opacity-75"></i>
+                </div>
+                <div class="guide-body">
+                    <h6 class="fw-bold text-success mb-2"><i class="bi bi-check-circle-fill me-1"></i> What Goes In:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-check2"></i> Fruit and vegetable peels, vegetable trimmings, spoiled produce.</li>
+                        <li><i class="bi bi-check2"></i> Leftover cooked food, curry residue, plate scrapings.</li>
+                        <li><i class="bi bi-check2"></i> Eggshells, tea bags, coffee grounds, coconut shells.</li>
+                        <li><i class="bi bi-check2"></i> Garden leaves, grass clippings, wilted flowers, and festive organic offerings.</li>
+                        <li><i class="bi bi-check2"></i> Meat bones and seafood residue (where acceptable by municipal composter).</li>
+                    </ul>
+
+                    <h6 class="fw-bold text-danger mb-2"><i class="bi bi-x-circle-fill me-1"></i> What Must NOT Go In:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-x text-danger"></i> Plastic bags or plastic container linings (never dispose food inside tied plastic pouches).</li>
+                        <li><i class="bi bi-x text-danger"></i> Diapers, sanitary napkins, pet poop, or medical bandages.</li>
+                    </ul>
+
+                    <div class="bg-light p-3 rounded-3 small">
+                        <strong>Practical Eco-Tip:</strong> Drain excess gravy or liquid before placing in the bin to minimize foul odor and fly breeding. Consider home composting or apartment vermicomposting to generate nutrient-rich garden soil.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Dry Waste -->
+        <div class="col-lg-6" id="dry-waste">
+            <div class="guide-card">
+                <div class="guide-card-header guide-dry-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-0">2. Dry & Recyclable Waste</h4>
+                        <small class="text-white-50">Inorganics & Non-Biodegradables • Standard Blue Bin</small>
+                    </div>
+                    <i class="bi bi-box-seam fs-1 opacity-75"></i>
+                </div>
+                <div class="guide-body">
+                    <h6 class="fw-bold text-primary mb-2"><i class="bi bi-check-circle-fill me-1"></i> What Goes In:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-check2"></i> Newspapers, office paper, notebooks, envelopes, and receipts.</li>
+                        <li><i class="bi bi-check2"></i> Cardboard boxes, cereal boxes, corrugated packaging cartons.</li>
+                        <li><i class="bi bi-check2"></i> Metal cans, aluminum foil (clean), tin lids, iron bottle caps.</li>
+                        <li><i class="bi bi-check2"></i> Glass beverage bottles, food jars, cosmetic glassware (unbroken).</li>
+                        <li><i class="bi bi-check2"></i> Clean textiles, cotton rags, old clothes, worn footwear.</li>
+                    </ul>
+
+                    <h6 class="fw-bold text-danger mb-2"><i class="bi bi-x-circle-fill me-1"></i> What Must NOT Go In:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-x text-danger"></i> Food-soiled greasy pizza boxes or oil-drenched paper.</li>
+                        <li><i class="bi bi-x text-danger"></i> Broken mirror glass, ceramics, or light bulbs.</li>
+                    </ul>
+
+                    <div class="bg-light p-3 rounded-3 small">
+                        <strong>Practical Eco-Tip:</strong> Flatten cardboard boxes to save bin volume. Ensure paper and cans are clean and completely dry to prevent molding in transit.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Plastic Waste -->
+        <div class="col-lg-6" id="plastic-waste">
+            <div class="guide-card">
+                <div class="guide-card-header guide-plastic-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-0">3. Plastic Waste</h4>
+                        <small class="text-white-50">Polymers, Films & Packaging • Dedicated Recyclables Bin</small>
+                    </div>
+                    <i class="bi bi-cup-straw fs-1 opacity-75"></i>
+                </div>
+                <div class="guide-body">
+                    <h6 class="fw-bold text-warning mb-2"><i class="bi bi-check-circle-fill me-1"></i> What Goes In:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-check2"></i> Type 1 (PET): Mineral water bottles, soda bottles, clear juice containers.</li>
+                        <li><i class="bi bi-check2"></i> Type 2 (HDPE): Shampoo bottles, detergent cans, milk gallon jugs.</li>
+                        <li><i class="bi bi-check2"></i> Type 5 (PP): Food take-away containers, yogurt tubs, bottle caps.</li>
+                        <li><i class="bi bi-check2"></i> Clean milk pouches and oil pouches (washed, snipped, and dried).</li>
+                        <li><i class="bi bi-check2"></i> Bubble wrap, protective air pouches, clean grocery polybags.</li>
+                    </ul>
+
+                    <h6 class="fw-bold text-danger mb-2"><i class="bi bi-x-circle-fill me-1"></i> What Must NOT Go In:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-x text-danger"></i> Multilayer metallized plastic snack bags (chips packets) without local MLP collection.</li>
+                        <li><i class="bi bi-x text-danger"></i> Unrinsed milk/curd pouches that contain liquid residue.</li>
+                    </ul>
+
+                    <div class="bg-light p-3 rounded-3 small">
+                        <strong>Practical Eco-Tip:</strong> When opening milk pouches, do not snip off the small corner completely. Leave it attached to the main packet so small plastic bits do not choke urban storm drains.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Electronic Waste (E-waste) -->
+        <div class="col-lg-6" id="ewaste">
+            <div class="guide-card">
+                <div class="guide-card-header guide-ewaste-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-0">4. Electronic Waste (E-waste)</h4>
+                        <small class="text-white-50">Hazardous Circuitry & Batteries • Authorized E-Waste Centers</small>
+                    </div>
+                    <i class="bi bi-motherboard fs-1 opacity-75"></i>
+                </div>
+                <div class="guide-body">
+                    <h6 class="fw-bold text-purple mb-2" style="color: #6b21a8;"><i class="bi bi-check-circle-fill me-1"></i> What Goes In:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-check2"></i> Obsolete mobile phones, tablets, chargers, and USB cords.</li>
+                        <li><i class="bi bi-check2"></i> Computer motherboards, hard disks, RAM sticks, power cables.</li>
+                        <li><i class="bi bi-check2"></i> Keyboards, mice, webcams, headphones, and Bluetooth earbuds.</li>
+                        <li><i class="bi bi-check2"></i> Rechargeable lithium-ion cells, laptop batteries, button batteries.</li>
+                        <li><i class="bi bi-check2"></i> Broken home appliances: toasters, blenders, electric kettles.</li>
+                    </ul>
+
+                    <h6 class="fw-bold text-danger mb-2"><i class="bi bi-x-circle-fill me-1"></i> Critical Safety Warning:</h6>
+                    <ul class="guide-item-list mb-3">
+                        <li><i class="bi bi-exclamation-triangle-fill text-danger"></i> <strong>NEVER</strong> discard e-waste into normal municipal garbage trucks or burn it.</li>
+                        <li><i class="bi bi-exclamation-triangle-fill text-danger"></i> Electronics contain heavy metals (lead, mercury, cadmium) that leach into groundwater.</li>
+                    </ul>
+
+                    <div class="bg-light p-3 rounded-3 small">
+                        <strong>Practical Eco-Tip:</strong> Utilize authorized State Pollution Control Board (MPCB) electronic collection centers or retailer take-back kiosks in electronic retail stores.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Mixed, Hazardous & Other Waste -->
+        <div class="col-12" id="mixed-waste">
+            <div class="guide-card">
+                <div class="guide-card-header guide-mixed-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-0">5. Mixed, Domestic Hazardous & Construction Waste</h4>
+                        <small class="text-white-50">Sanitary, Chemical & Construction Residue • Secure Packaging</small>
+                    </div>
+                    <i class="bi bi-radioactive fs-1 opacity-75"></i>
+                </div>
+                <div class="guide-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-dark mb-2">Domestic Hazardous Waste:</h6>
+                            <ul class="guide-item-list mb-3">
+                                <li><i class="bi bi-dot fs-4 text-warning"></i> Expired pharmaceutical medicines, syrup bottles, blister packs.</li>
+                                <li><i class="bi bi-dot fs-4 text-warning"></i> Paint cans, varnish thinners, chemical solvents.</li>
+                                <li><i class="bi bi-dot fs-4 text-warning"></i> Insecticide sprays, mosquito repellant coils, rodent poison.</li>
+                                <li><i class="bi bi-dot fs-4 text-warning"></i> Fluorescent tube lights and mercury-containing thermometers.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-dark mb-2">Sanitary & Biomedical Protocols:</h6>
+                            <ul class="guide-item-list mb-3">
+                                <li><i class="bi bi-dot fs-4 text-danger"></i> Diapers, sanitary napkins, and medical dressings must be securely wrapped in newspaper or biodegradable pouches marked with a red cross.</li>
+                                <li><i class="bi bi-dot fs-4 text-secondary"></i> Construction & Demolition (C&D) debris (concrete rubble, broken tiles, plaster) must be scheduled via municipal bulk pickup hotlines.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to action -->
+    <div class="text-center mt-5 pt-3">
+        <h4>Spotted unsegregated dumping in your ward?</h4>
+        <p class="text-muted">Submit an alert with photographic evidence so our civic team can dispatch segregation bins and intervention crews.</p>
+        <a href="{{ url_for('citizen.report_waste') }}" class="btn btn-primary-eco btn-lg px-4 shadow">
+            <i class="bi bi-plus-circle me-1"></i> Report Waste Hotspot
+        </a>
+    </div>
+</div>
+{% endblock %}

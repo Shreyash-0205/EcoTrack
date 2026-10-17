@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Interactive Waste Hotspots Map — EcoTrack{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4 py-4">
+    <!-- Map Header & Filter Controls -->
+    <div class="card-modern p-3 mb-3 shadow-sm bg-white">
+        <div class="row g-3 align-items-center">
+            <div class="col-lg-3 col-md-12">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-geo-alt-fill text-success fs-3"></i>
+                    <div>
+                        <h5 class="fw-bold mb-0">Hotspot Map</h5>
+                        <small class="text-muted" id="map-reports-count">{{ reports_count }} Hotspots Mapped</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="col-lg-2 col-sm-6">
+                <label for="filter-category" class="form-label small fw-semibold text-muted mb-1">Waste Stream</label>
+                <select id="filter-category" class="form-select form-select-sm">
+                    <option value="">All Categories</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat }}">{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-lg-2 col-sm-6">
+                <label for="filter-status" class="form-label small fw-semibold text-muted mb-1">Resolution Status</label>
+                <select id="filter-status" class="form-select form-select-sm">
+                    <option value="">All Statuses</option>
+                    {% for st in statuses %}
+                        <option value="{{ st }}">{{ st }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-lg-3 col-sm-8">
+                <label for="filter-search" class="form-label small fw-semibold text-muted mb-1">Search Landmark / Title</label>
+                <div class="input-group input-group-sm">
+                    <input type="text" id="filter-search" class="form-control" placeholder="e.g. Dadar, BKC, Bandra...">
+                    <button class="btn btn-primary-eco" id="btn-apply-filters" type="button">
+                        <i class="bi bi-funnel-fill"></i> Filter
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-sm-4 text-sm-end">
+                <label class="form-label d-none d-sm-block small fw-semibold text-muted mb-1">&nbsp;</label>
+                <button class="btn btn-outline-secondary btn-sm w-100" id="btn-reset-filters" type="button">
+                    <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Viewport -->
+    <div class="row g-3">
+        <div class="col-lg-9 col-md-12">
+            <div class="card-modern shadow-sm overflow-hidden position-relative">
+                <div id="main-map"></div>
+
+                <!-- Live Map Legend -->
+                <div class="position-absolute bottom-0 start-0 m-3 p-2 bg-white bg-opacity-95 rounded-3 shadow-sm border small" style="z-index: 1000; font-size: 0.8rem;">
+                    <div class="fw-bold mb-1 text-dark">Status Legend:</div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span><span class="badge bg-warning text-dark">&nbsp;</span> Reported</span>
+                        <span><span class="badge bg-primary text-white">&nbsp;</span> In Progress</span>
+                        <span><span class="badge bg-success text-white">&nbsp;</span> Resolved</span>
+                        <span><span class="badge bg-secondary text-white">&nbsp;</span> Rejected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar / Transparency Info -->
+        <div class="col-lg-3 col-md-12">
+            <div class="card-modern p-3 mb-3 shadow-sm bg-white">
+                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-info-circle text-primary me-1"></i> Data Transparency</h6>
+                <p class="small text-muted mb-2">
+                    EcoTrack displays coordinates precisely as submitted by reporting citizens or municipal sanitation officers. No artificial coordinates are generated.
+                </p>
+                {% if missing_coords_count > 0 %}
+                    <div class="alert alert-light border small py-2 px-3 mb-0">
+                        <i class="bi bi-geo text-warning me-1"></i>
+                        <strong>{{ missing_coords_count }} report(s)</strong> do not have GPS coordinates attached and are tracked via physical landmark addresses in the tabular registry.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="card-modern p-3 shadow-sm bg-white">
+                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-flag-fill text-success me-1"></i> Submit Hotspot</h6>
+                <p class="small text-muted mb-3">
+                    Did you encounter an overflowing garbage bin, plastic heap, or unsegregated dump?
+                </p>
+                <a href="{{ url_for('citizen.report_waste') }}" class="btn btn-emerald btn-sm w-100 shadow-sm">
+                    <i class="bi bi-plus-circle-fill me-1"></i> Report Waste Hotspot
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

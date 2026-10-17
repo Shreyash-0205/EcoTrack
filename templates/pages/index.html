@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+{% block title %}EcoTrack — Smart Waste Management & Segregation System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="badge bg-emerald text-white px-3 py-2 rounded-pill mb-3 fw-semibold" style="background-color: var(--emerald-green);">
+                    <i class="bi bi-shield-check me-1"></i> Open-Source Civic Tech Platform
+                </span>
+                <h1 class="hero-title">Clean Communities Start with Smart Waste Tracking.</h1>
+                <p class="hero-subtitle">
+                    EcoTrack bridges citizens and municipal sanitation crews. Report garbage hotspots, categorize waste streams scientifically, and track cleanup operations in real time.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    {% if current_user %}
+                        <a href="{{ url_for('citizen.report_waste') }}" class="btn btn-emerald btn-lg px-4 shadow">
+                            <i class="bi bi-plus-circle-fill me-2"></i> Report Waste Hotspot
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('auth.register') }}" class="btn btn-emerald btn-lg px-4 shadow">
+                            <i class="bi bi-person-plus-fill me-2"></i> Get Started as Citizen
+                        </a>
+                    {% endif %}
+                    <a href="{{ url_for('main.map_view') }}" class="btn btn-outline-light btn-lg px-4">
+                        <i class="bi bi-map-fill me-2"></i> Explore Live Map
+                    </a>
+                    <a href="{{ url_for('main.segregation_guide') }}" class="btn btn-outline-light btn-lg px-4">
+                        <i class="bi bi-journal-bookmark me-2"></i> Segregation Guide
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block text-center">
+                <div class="card-modern p-4 text-start bg-white text-dark shadow-lg">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h6 class="fw-bold mb-0 text-success">Civic Resolution Rate</h6>
+                        <span class="badge bg-success">{{ stats.resolution_rate }}%</span>
+                    </div>
+                    <div class="progress mb-3" style="height: 10px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ stats.resolution_rate }}%;" aria-valuenow="{{ stats.resolution_rate }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="d-flex justify-content-between small text-muted">
+                        <span><strong>{{ stats.resolved }}</strong> Resolved</span>
+                        <span><strong>{{ stats.total }}</strong> Total Reports</span>
+                    </div>
+                    <hr>
+                    <div class="small text-muted mb-3">
+                        <i class="bi bi-people-fill text-primary me-1"></i> Active Citizens: <strong>{{ stats.citizens }}</strong>
+                    </div>
+                    <a href="{{ url_for('main.map_view') }}" class="btn btn-sm btn-outline-success w-100">
+                        View Hotspots on Map
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Statistics Strip -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-xl-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-total">
+                        <i class="bi bi-flag-fill"></i>
+                    </div>
+                    <div>
+                        <div class="stat-number">{{ stats.total }}</div>
+                        <div class="stat-label">Total Reports</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-resolved">
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
+                    <div>
+                        <div class="stat-number">{{ stats.resolved }}</div>
+                        <div class="stat-label">Resolved Cleanups</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-progress">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                    <div>
+                        <div class="stat-number">{{ stats.in_progress }}</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-pending">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                    <div>
+                        <div class="stat-number">{{ stats.pending }}</div>
+                        <div class="stat-label">Pending Triage</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-5" style="background-color: var(--mint-bg);">
+    <div class="container py-3">
+        <div class="text-center max-w-700 mx-auto mb-5">
+            <span class="badge bg-success bg-opacity-25 text-success px-3 py-1 rounded-pill fw-semibold">
+                Transparent Workflow
+            </span>
+            <h2 class="fw-bold mt-2">How EcoTrack Operates</h2>
+            <p class="text-muted">A closed-loop civic reporting pipeline that ensures accountability from citizen complaint to verified ground cleanup.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card-modern p-4 text-center h-100">
+                    <div class="rounded-circle bg-success bg-opacity-10 text-success d-inline-flex p-3 mb-3">
+                        <i class="bi bi-camera-fill fs-2"></i>
+                    </div>
+                    <h5 class="fw-bold">1. Spot & Report</h5>
+                    <p class="text-muted small">
+                        Citizens identify an unattended waste hotspot, drop a GPS pin or landmark, select waste category, and upload an optional photo.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-modern p-4 text-center h-100">
+                    <div class="rounded-circle bg-primary bg-opacity-10 text-primary d-inline-flex p-3 mb-3">
+                        <i class="bi bi-diagram-3-fill fs-2"></i>
+                    </div>
+                    <h5 class="fw-bold">2. Triage & Segregation</h5>
+                    <p class="text-muted small">
+                        Sanitation administrators review submitted reports, assess waste stream categories (Wet, Dry, Plastic, E-waste), and assign dedicated municipal crews.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-modern p-4 text-center h-100">
+                    <div class="rounded-circle bg-emerald bg-opacity-10 text-success d-inline-flex p-3 mb-3">
+                        <i class="bi bi-check-all fs-2"></i>
+                    </div>
+                    <h5 class="fw-bold">3. Verified Resolution</h5>
+                    <p class="text-muted small">
+                        Cleanup actions are recorded with administrative notes and audit logs. The hotspot is marked resolved with public status tracking.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Reports Section -->
+<section class="py-5 bg-white">
+    <div class="container py-2">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="badge bg-secondary bg-opacity-10 text-secondary px-3 py-1 rounded-pill fw-semibold">
+                    Live Feed
+                </span>
+                <h2 class="fw-bold mt-2 mb-0">Recent Hotspot Reports</h2>
+            </div>
+            <div>
+                <a href="{{ url_for('main.map_view') }}" class="btn btn-outline-success btn-sm">
+                    <i class="bi bi-map me-1"></i> View All on Interactive Map
+                </a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            {% for report in recent_reports %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-modern h-100 d-flex flex-column">
+                        {% if report.image_filename %}
+                            <div style="height: 180px; overflow: hidden; background: #f1f5f9;">
+                                <img src="{{ url_for('api.serve_uploaded_image', filename=report.image_filename) }}" 
+                                     alt="{{ report.title }}" 
+                                     class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                        {% else %}
+                            <div class="d-flex align-items-center justify-content-center bg-light text-muted" style="height: 120px;">
+                                <div class="text-center">
+                                    <i class="bi bi-image fs-3"></i>
+                                    <div class="small">No photo attached</div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge {{ report.status_badge_class }}">{{ report.status }}</span>
+                                <span class="badge {{ report.category_badge_class }}">{{ report.category }}</span>
+                            </div>
+
+                            <h5 class="fw-bold mb-2 text-truncate" title="{{ report.title }}">
+                                {{ report.title }}
+                            </h5>
+                            
+                            <p class="text-muted small mb-3 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                {{ report.description }}
+                            </p>
+
+                            <div class="small text-muted mb-2">
+                                <i class="bi bi-geo-alt-fill text-danger me-1"></i> {{ report.location }}
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-auto small">
+                                <span class="text-muted">{{ report.created_at.strftime('%d %b %Y') }}</span>
+                                <a href="{{ url_for('citizen.report_detail', report_id=report.id) }}" class="btn btn-sm btn-outline-primary">
+                                    Details <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        <i class="bi bi-clipboard-x empty-state-icon"></i>
+                        <h5>No waste reports submitted yet</h5>
+                        <p class="text-muted">Be the first to report an unattended waste hotspot in your neighborhood!</p>
+                        <a href="{{ url_for('citizen.report_waste') }}" class="btn btn-primary-eco">
+                            Submit a Report
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Segregation Quick Strip -->
+<section class="py-5" style="background-color: #f8fafc;">
+    <div class="container text-center">
+        <h3 class="fw-bold mb-3">Scientific Waste Segregation at Source</h3>
+        <p class="text-muted max-w-700 mx-auto mb-4">
+            Proper segregation converts waste into recyclable resources. Explore our detailed guide on color-coded bins and municipal compliance.
+        </p>
+        <a href="{{ url_for('main.segregation_guide') }}" class="btn btn-primary-eco px-4">
+            <i class="bi bi-book-half me-2"></i> Read Full Segregation Guide
+        </a>
+    </div>
+</section>
+{% endblock %}

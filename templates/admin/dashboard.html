@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block title %}Administrator Dashboard — EcoTrack{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4 py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+            <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-danger">ADMINISTRATOR CONSOLE</span>
+                <span class="text-muted small">&bull; MCGM Civic Portal</span>
+            </div>
+            <h2 class="fw-bold mb-0">Civic Waste Operations Dashboard</h2>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('admin.manage_reports') }}" class="btn btn-primary-eco shadow-sm">
+                <i class="bi bi-kanban me-1"></i> Manage All Reports
+            </a>
+            <a href="{{ url_for('admin.activity_logs') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-journal-text me-1"></i> View Audit Logs
+            </a>
+        </div>
+    </div>
+
+    <!-- Aggregate Metric Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-total">
+                    <i class="bi bi-files"></i>
+                </div>
+                <div>
+                    <div class="stat-number">{{ stats.total }}</div>
+                    <div class="stat-label">Total Reports</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-pending">
+                    <i class="bi bi-hourglass-top"></i>
+                </div>
+                <div>
+                    <div class="stat-number">{{ stats.pending }}</div>
+                    <div class="stat-label">Pending Triage</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-progress">
+                    <i class="bi bi-arrow-repeat"></i>
+                </div>
+                <div>
+                    <div class="stat-number">{{ stats.in_progress }}</div>
+                    <div class="stat-label">In Progress</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-resolved">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <div>
+                    <div class="stat-number">{{ stats.resolved }}</div>
+                    <div class="stat-label">Resolved</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #f1f5f9; color: #475569;">
+                    <i class="bi bi-x-circle-fill"></i>
+                </div>
+                <div>
+                    <div class="stat-number">{{ stats.rejected }}</div>
+                    <div class="stat-label">Rejected</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-citizens">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <div>
+                    <div class="stat-number">{{ stats.citizens }}</div>
+                    <div class="stat-label">Citizens</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Charts Row -->
+    <div class="row g-4 mb-4">
+        <!-- Category Doughnut -->
+        <div class="col-lg-5">
+            <div class="card-modern p-4 h-100 shadow-sm bg-white">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0 text-dark">Waste Stream Distribution</h6>
+                    <span class="badge bg-light text-muted border">Category Split</span>
+                </div>
+                <div style="height: 250px; position: relative;">
+                    <canvas id="adminCategoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar Chart -->
+        <div class="col-lg-7">
+            <div class="card-modern p-4 h-100 shadow-sm bg-white">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0 text-dark">Resolution Status Overview</h6>
+                    <span class="badge bg-light text-muted border">Operational Funnel</span>
+                </div>
+                <div style="height: 250px; position: relative;">
+                    <canvas id="adminStatusChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Submissions & Audit Log Split Row -->
+    <div class="row g-4">
+        <!-- Recent Reports Table -->
+        <div class="col-lg-7">
+            <div class="card-modern shadow-sm bg-white overflow-hidden h-100">
+                <div class="card-header-clean d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Recent Hotspot Reports Awaiting Review</h6>
+                    <a href="{{ url_for('admin.manage_reports') }}" class="small text-success fw-semibold text-decoration-none">
+                        All Reports <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0 small">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Hotspot Title</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th class="text-end">Quick Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for report in recent_reports %}
+                                <tr>
+                                    <td><strong>#{{ report.id }}</strong></td>
+                                    <td>
+                                        <div class="fw-semibold text-truncate" style="max-width: 220px;" title="{{ report.title }}">
+                                            {{ report.title }}
+                                        </div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">
+                                            <i class="bi bi-geo-alt"></i> {{ report.location }}
+                                        </div>
+                                    </td>
+                                    <td><span class="badge {{ report.category_badge_class }}">{{ report.category }}</span></td>
+                                    <td><span class="badge {{ report.status_badge_class }}">{{ report.status }}</span></td>
+                                    <td class="text-end">
+                                        <a href="{{ url_for('citizen.report_detail', report_id=report.id) }}" class="btn btn-xs btn-outline-primary py-1 px-2">
+                                            Review
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center py-4 text-muted">No reports submitted.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Audit Trail Feed -->
+        <div class="col-lg-5">
+            <div class="card-modern shadow-sm bg-white overflow-hidden h-100">
+                <div class="card-header-clean d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark">Administrative Activity Audit</h6>
+                    <a href="{{ url_for('admin.activity_logs') }}" class="small text-secondary fw-semibold text-decoration-none">
+                        View Log History <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="p-3">
+                    <ul class="list-unstyled mb-0 small">
+                        {% for log in recent_logs %}
+                            <li class="mb-3 pb-2 border-bottom">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <strong class="text-dark">{{ log.action }}</strong>
+                                    <span class="text-muted" style="font-size: 0.72rem;">{{ log.created_at.strftime('%d %b, %H:%M') }}</span>
+                                </div>
+                                <div class="text-muted" style="font-size: 0.78rem;">
+                                    By: <strong>{{ log.admin_user.name if log.admin_user else 'Admin' }}</strong>
+                                    {% if log.report_id %} &bull; Report #{{ log.report_id }}{% endif %}
+                                </div>
+                                {% if log.details %}
+                                    <div class="text-secondary bg-light p-1 rounded mt-1" style="font-size: 0.75rem;">
+                                        {{ log.details }}
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% else %}
+                            <li class="text-muted text-center py-4">No audit activity logged yet.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts_extra %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Render Category Doughnut
+    const catLabels = {{ stats.category_counts.keys()|list|tojson }};
+    const catValues = {{ stats.category_counts.values()|list|tojson }};
+    renderCategoryDoughnut('adminCategoryChart', catLabels, catValues);
+
+    // Render Status Bar Chart
+    const statusLabels = {{ stats.status_counts.keys()|list|tojson }};
+    const statusValues = {{ stats.status_counts.values()|list|tojson }};
+    renderStatusBarChart('adminStatusChart', statusLabels, statusValues);
+});
+</script>
+{% endblock %}

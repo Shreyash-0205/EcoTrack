@@ -1,0 +1,467 @@
+/*
+ * EcoTrack — Smart Waste Management and Segregation System
+ * Modern, Clean, Eco-friendly UI Theme
+ */
+
+:root {
+    --forest-green: #1b5e20;
+    --forest-green-dark: #123e15;
+    --emerald-green: #10b981;
+    --emerald-green-dark: #059669;
+    --mint-bg: #f0fdf4;
+    --mint-border: #bbf7d0;
+    --surface-white: #ffffff;
+    --bg-light: #f8fafc;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --transition: all 0.2s ease-in-out;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Navbar Styling */
+.navbar-ecotrack {
+    background-color: var(--forest-green);
+    box-shadow: var(--shadow-md);
+    padding: 0.75rem 1rem;
+}
+
+.navbar-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: #ffffff !important;
+    letter-spacing: -0.02em;
+}
+
+.navbar-brand-logo svg, .navbar-brand-logo i {
+    color: var(--emerald-green);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.88) !important;
+    font-weight: 500;
+    padding: 0.5rem 0.85rem !important;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.btn-report-nav {
+    background-color: var(--emerald-green);
+    color: #ffffff !important;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.45rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: var(--transition);
+}
+
+.btn-report-nav:hover {
+    background-color: var(--emerald-green-dark);
+    transform: translateY(-1px);
+}
+
+/* Card Styling */
+.card-modern {
+    background: var(--surface-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.card-modern:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card-header-clean {
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.15rem 1.25rem;
+    font-weight: 600;
+}
+
+/* Stat Cards */
+.stat-card {
+    border-radius: var(--radius-md);
+    padding: 1.35rem;
+    background: var(--surface-white);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-icon-total { background: #e0f2fe; color: #0284c7; }
+.stat-icon-pending { background: #fef3c7; color: #d97706; }
+.stat-icon-progress { background: #e0e7ff; color: #4f46e5; }
+.stat-icon-resolved { background: #dcfce7; color: #16a34a; }
+.stat-icon-citizens { background: #f3e8ff; color: #9333ea; }
+
+.stat-number {
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Category Badges */
+.badge-category-wet {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.badge-category-dry {
+    background-color: #e0f2fe;
+    color: #075985;
+    border: 1px solid #bae6fd;
+}
+
+.badge-category-plastic {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.badge-category-ewaste {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+    border: 1px solid #e9d5ff;
+}
+
+.badge-category-mixed {
+    background-color: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+}
+
+.badge-category-other {
+    background-color: #ccfbf1;
+    color: #115e59;
+    border: 1px solid #99f6e4;
+}
+
+.badge-tag {
+    font-weight: 600;
+    padding: 0.35rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* Demo Badge */
+.badge-demo {
+    background-color: #fef08a;
+    color: #854d0e;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px dashed #ca8a04;
+}
+
+/* Buttons */
+.btn-primary-eco {
+    background-color: var(--forest-green);
+    border-color: var(--forest-green);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 1.25rem;
+    transition: var(--transition);
+}
+
+.btn-primary-eco:hover {
+    background-color: var(--forest-green-dark);
+    border-color: var(--forest-green-dark);
+    color: #ffffff;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-emerald {
+    background-color: var(--emerald-green);
+    border-color: var(--emerald-green);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 1.25rem;
+    transition: var(--transition);
+}
+
+.btn-emerald:hover {
+    background-color: var(--emerald-green-dark);
+    border-color: var(--emerald-green-dark);
+    color: #ffffff;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1b5e20 0%, #0d3811 100%);
+    color: #ffffff;
+    padding: 4.5rem 1rem 3.5rem;
+    position: relative;
+    border-bottom: 4px solid var(--emerald-green);
+}
+
+.hero-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 680px;
+    margin: 1.25rem 0 2rem;
+}
+
+/* Map Containers */
+#main-map {
+    height: 600px;
+    width: 100%;
+    border-radius: var(--radius-md);
+    z-index: 1;
+}
+
+#picker-map {
+    height: 320px;
+    width: 100%;
+    border-radius: var(--radius-sm);
+    z-index: 1;
+}
+
+#detail-map {
+    height: 280px;
+    width: 100%;
+    border-radius: var(--radius-sm);
+    z-index: 1;
+}
+
+/* Custom Marker Styling */
+.map-marker-pin {
+    width: 32px;
+    height: 32px;
+    border-radius: 50% 50% 50% 0;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -20px 0 0 -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.map-marker-pin::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 8px 0 0 8px;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.map-marker-reported { background-color: #f59e0b; }
+.map-marker-inprogress { background-color: #3b82f6; }
+.map-marker-resolved { background-color: #10b981; }
+.map-marker-rejected { background-color: #6b7280; }
+
+/* Educational Guide Styling */
+.guide-card {
+    border-radius: var(--radius-md);
+    background: var(--surface-white);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.guide-card-header {
+    padding: 1.5rem;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    color: #ffffff;
+}
+
+.guide-wet-header { background: linear-gradient(135deg, #166534, #15803d); }
+.guide-dry-header { background: linear-gradient(135deg, #0369a1, #0284c7); }
+.guide-plastic-header { background: linear-gradient(135deg, #b45309, #d97706); }
+.guide-ewaste-header { background: linear-gradient(135deg, #6b21a8, #7e22ce); }
+.guide-mixed-header { background: linear-gradient(135deg, #334155, #475569); }
+
+.guide-body {
+    padding: 1.5rem;
+    flex: 1 1 auto;
+}
+
+.guide-item-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.guide-item-list li {
+    padding: 0.35rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+}
+
+.guide-item-list li i {
+    color: var(--emerald-green);
+    margin-top: 0.2rem;
+}
+
+/* Empty States */
+.empty-state {
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+    background: var(--surface-white);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* Report Image Thumbnail */
+.report-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.report-detail-image {
+    max-height: 400px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Footer */
+.footer-ecotrack {
+    background-color: #0f2d12;
+    color: rgba(255, 255, 255, 0.78);
+    padding: 3rem 1rem 1.5rem;
+    margin-top: 4rem;
+    border-top: 3px solid var(--emerald-green);
+    font-size: 0.92rem;
+}
+
+.footer-heading {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 1.15rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    padding-left: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    #main-map {
+        height: 420px;
+    }
+    .stat-card {
+        padding: 1rem;
+    }
+}
