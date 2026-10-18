@@ -122,17 +122,47 @@ Urban centers such as Greater Mumbai generate over 10,000 metric tons of municip
 
 ---
 
-## 5. Demonstration Credentials
+## 5. Demonstration Accounts & Local Initialization
 
-For testing and demonstration, use the pre-configured seed accounts:
+EcoTrack includes a local database seeding utility (`seed_data.py`) to set up initial administrative and citizen accounts for evaluation and local testing.
 
-| Role | Email Address | Password | Permissions |
+### Local Seeding Command
+
+To initialize the local SQLite database with pre-configured demonstration accounts and sample civic reports, run:
+
+```bash
+python seed_data.py
+```
+
+Upon successful execution, the script initializes the database tables, generates salted `scrypt` password hashes, and outputs the local initialization status directly to your terminal console:
+
+```text
+[EcoTrack Seed] Initializing database tables...
+[EcoTrack Seed] Creating demo users...
+[EcoTrack Seed] Creating realistic Mumbai civic demo reports...
+[EcoTrack Seed] Generating realistic administrative activity logs...
+[EcoTrack Seed] Database seeded successfully!
+```
+
+### Pre-Configured Demonstration Roles
+
+The seed script initializes the following role-based accounts:
+
+| Role | Name | Email Address | Access & Permissions |
 | :--- | :--- | :--- | :--- |
-| **Administrator (MCGM)** | `admin@ecotrack.org` | `AdminPassword123` | Full access to Admin Dashboard, Status Triage, Deletions, and Audit Logs. |
-| **Citizen (Aarav Sharma)**| `citizen@ecotrack.org` | `CitizenPassword123` | Hotspot submission, personal report management, and editing pending reports. |
-| **Citizen (Priya Deshmukh)**| `priya@ecotrack.org` | `CitizenPassword123` | Hotspot submission and personal tracking. |
+| **Administrator** | Civic Administrator (MCGM) | `admin@ecotrack.org` | Full access to Admin Dashboard (`/admin/dashboard`), Status Triage (`/admin/manage-reports`), Report Deletion, and System Audit Logs (`/admin/logs`). |
+| **Citizen** | Aarav Sharma | `citizen@ecotrack.org` | Citizen Dashboard (`/dashboard`), Hotspot Reporting (`/report`), and editing pending complaints (`/my-reports`). |
+| **Citizen** | Priya Deshmukh | `priya@ecotrack.org` | Citizen Dashboard (`/dashboard`), Hotspot Reporting (`/report`), and personal complaint tracking. |
+| **Citizen** | Rohan Kulkarni | `rohan@ecotrack.org` | Citizen Dashboard (`/dashboard`), Hotspot Reporting (`/report`), and personal complaint tracking. |
 
-*(The login page includes convenient one-click demo autofill buttons for rapid evaluator review!)*
+> **Note on Local Passwords:** To avoid exposing hardcoded credentials in published source code, `seed_data.py` reads initial demonstration passwords from environment variables (`ECOTRACK_ADMIN_PASSWORD` and `ECOTRACK_CITIZEN_PASSWORD`) or generates secure random passwords during local database initialization, outputting them directly to your local terminal.
+
+### Registering New Accounts
+
+You can also create fresh citizen accounts at any time through the application interface:
+1. Navigate to `http://127.0.0.1:5000/auth/register` (or click **Register** in the navigation bar).
+2. Complete the registration form with your name, email, and password.
+3. Sign in immediately at `http://127.0.0.1:5000/auth/login`.
 
 ---
 

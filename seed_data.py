@@ -3,6 +3,8 @@ Sample seed data generator for EcoTrack demonstration.
 Populates realistic demo reports for Mumbai metropolitan civic areas.
 All sample reports are explicitly tagged with is_demo=True and a demo identifier.
 """
+import os
+import secrets
 from datetime import datetime, timezone, timedelta
 from app import create_app
 from models import db, User, Report, ActivityLog
@@ -22,13 +24,28 @@ def seed_database():
             return
 
         print("[EcoTrack Seed] Creating demo users...")
+        # Resolve initial passwords safely without hardcoding in published source:
+        # Check environment variables first (ECOTRACK_ADMIN_PASSWORD, ECOTRACK_CITIZEN_PASSWORD).
+        # If not set, generate cryptographically secure random passwords for this local installation.
+        admin_password = os.environ.get('ECOTRACK_ADMIN_PASSWORD')
+        admin_pw_generated = False
+        if not admin_password:
+            admin_password = secrets.token_urlsafe(12)
+            admin_pw_generated = True
+
+        citizen_password = os.environ.get('ECOTRACK_CITIZEN_PASSWORD')
+        citizen_pw_generated = False
+        if not citizen_password:
+            citizen_password = secrets.token_urlsafe(12)
+            citizen_pw_generated = True
+
         # 1. Administrator
         admin = User(
             name="Civic Administrator (MCGM)",
             email="admin@ecotrack.org",
             role="admin"
         )
-        admin.set_password("AdminPassword123")
+        admin.set_password(admin_password)
         db.session.add(admin)
 
         # 2. Citizens
@@ -37,7 +54,7 @@ def seed_database():
             email="citizen@ecotrack.org",
             role="citizen"
         )
-        citizen1.set_password("CitizenPassword123")
+        citizen1.set_password(citizen_password)
         db.session.add(citizen1)
 
         citizen2 = User(
@@ -45,7 +62,7 @@ def seed_database():
             email="priya@ecotrack.org",
             role="citizen"
         )
-        citizen2.set_password("CitizenPassword123")
+        citizen2.set_password(citizen_password)
         db.session.add(citizen2)
 
         citizen3 = User(
@@ -53,7 +70,7 @@ def seed_database():
             email="rohan@ecotrack.org",
             role="citizen"
         )
-        citizen3.set_password("CitizenPassword123")
+        citizen3.set_password(citizen_password)
         db.session.add(citizen3)
 
         db.session.commit()
@@ -252,10 +269,21 @@ def seed_database():
         for log in logs:
             db.session.add(log)
 
-        db.session.commit()
         print("[EcoTrack Seed] Database seeded successfully!")
-        print("  - Admin user: admin@ecotrack.org / AdminPassword123")
-        print("  - Citizen user: citizen@ecotrack.org / CitizenPassword123")
+        print(f"  - Admin user: {admin.email}")
+        if admin_pw_generated:
+            print(f"    Generated password: {admin_password}")
+            print("    (Set ECOTRACK_ADMIN_PASSWORD env var to customize)")
+        else:
+            print("    Password: configured via ECOTRACK_ADMIN_PASSWORD")
+
+        print(f"  - Citizen user: {citizen1.email}")
+        if citizen_pw_generated:
+            print(f"    Generated password: {citizen_password}")
+            print("    (Set ECOTRACK_CITIZEN_PASSWORD env var to customize)")
+        else:
+            print("    Password: configured via ECOTRACK_CITIZEN_PASSWORD")
+
         print(f"  - Total sample reports created: {len(sample_reports)}")
 
 
