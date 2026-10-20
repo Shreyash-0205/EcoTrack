@@ -303,3 +303,7 @@ For academic evaluation under the University of Mumbai Bachelor of Engineering c
 
 This project is open-source software licensed under the terms of the [MIT License](LICENSE). Third-party libraries (Flask, Bootstrap, Leaflet, Chart.js, Pillow, pytest) are used in accordance with their respective open-source licenses.
 
+## Git Workflow
+
+EcoTrack uses Git and GitHub for version control and collaborative development. Feature branches are used to develop changes independently, which can be submitted through Pull Requests for review before merging into the main branch.
+
